@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin-top: 50px;
+        }
+
+        #product-details {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        #product-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info-wrapper {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info-wrapper h3 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-info-wrapper .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .product-info-wrapper .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .product-details-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .product-image-wrapper {
+            flex: 1 1 45%;
+        }
+
+        .product-info {
+            flex: 1 1 45%;
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 767px) {
+            .product-details-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-image-wrapper, .product-info {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Related Products Section */
+        #related-products {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-product-card {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .related-product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .related-product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .related-product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .related-product-info h5 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .related-product-info p {
+            color: #007bff;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .related-product-info .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .related-product-info .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Quantity Input Styling */
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 1rem;
+            width: 70px;
+            text-align: center;
+        }
+
+        /* Animation for Section Titles */
+        .section-title h2 {
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="product-details" class="product-details section">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="productName" class="product-name">Product Name</h2>
+                <p id="productDescription" class="product-description">Detailed description of the product.</p>
+                <p id="productPrice" class="product-price">$199.99</p>
+            </div>
+            <div class="product-details-container">
+                <div class="product-image-wrapper">
+                    <img id="product-image" class="img-fluid" src="" alt="Product Image">
+                </div>
+                <div class="product-info">
+                    <div class="product-info-wrapper">
+                        <h3 id="product-name">Product Name</h3>
+                        <p id="product-description">Detailed description of the product.</p>
+                        <p id="product-price">$199.99</p>
+
+                        <div>
+                            <label for="product-quantity">Quantity:</label>
+                            <input type="number" id="product-quantity" class="form-control" value="1" min="1">
+                        </div>
+
+                        <button class="btn" id="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="related-products" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Related Products</h2>
+                <p>Explore more products that match your interests.</p>
+            </div>
+            <div class="row" id="related-products-container">
+                <!-- Related Products will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample products array (with descriptions added)
+        const products = [
+            { id: 1, name: "Smartphone X", category: "electronics", price: 299.99, image: "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg" },
+            { id: 2, name: "Leather Jacket", category: "fashion", price: 149.99, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGLB-hgOoO7hlwDvwxfIx7guwfprtC-NwP2w&s" },
+            { id: 3, name: "Dining Set", category: "home", price: 499.99, image: "https://media.istockphoto.com/id/1404603483/photo/female-autumn-clothes-on-hangers-in-white-room.jpg?s=612x612&w=0&k=20&c=BI8is6qBwJW9-pJMB_nqT48vM9uU-9VqIjpNu1uUtpQ=" },
+            { id: 4, name: "Coding for Beginners", category: "books", price: 29.99, image: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg" },
+            { id: 5, name: "Wireless Headphones", category: "electronics", price: 99.99, image: "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg" },
+            { id: 6, name: "Casual Shirt", category: "fashion", price: 39.99, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGLB-hgOoO7hlwDvwxfIx7guwfprtC-NwP2w&s" },
+            { id: 7, name: "Sofa Set", category: "home", price: 799.99, image: "https://media.istockphoto.com/id/1404603483/photo/female-autumn-clothes-on-hangers-in-white-room.jpg?s=612x612&w=0&k=20&c=BI8is6qBwJW9-pJMB_nqT48vM9uU-9VqIjpNu1uUtpQ=" },
+            { id: 8, name: "Advanced JavaScript", category: "books", price: 25.99, image: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg" },
+            { id: 9, name: "Laptop Pro", category: "electronics", price: 1199.99, image: "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg" },
+            { id: 10, name: "Fashionable Shoes", category: "fashion", price: 79.99, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGLB-hgOoO7hlwDvwxfIx7guwfprtC-NwP2w&s" },
+            { id: 11, name: "Office Chair", category: "home", price: 129.99, image: "https://media.istockphoto.com/id/1404603483/photo/female-autumn-clothes-on-hangers-in-white-room.jpg?s=612x612&w=0&k=20&c=BI8is6qBwJW9-pJMB_nqT48vM9uU-9VqIjpNu1uUtpQ=" },
+            { id: 12, name: "Python Basics", category: "books", price: 19.99, image: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg" },
+            { id: 13, name: "Smart Watch", category: "electronics", price: 199.99, image: "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg" },
+            { id: 14, name: "Summer Dress", category: "fashion", price: 49.99, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGLB-hgOoO7hlwDvwxfIx7guwfprtC-NwP2w&s" },
+            { id: 15, name: "Bed Frame", category: "home", price: 599.99, image: "https://media.istockphoto.com/id/1404603483/photo/female-autumn-clothes-on-hangers-in-white-room.jpg?s=612x612&w=0&k=20&c=BI8is6qBwJW9-pJMB_nqT48vM9uU-9VqIjpNu1uUtpQ=" },
+            { id: 16, name: "Data Science Book", category: "books", price: 35.99, image: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg" },
+            { id: 17, name: "Camera Lens", category: "electronics", price: 299.99, image: "https://img.freepik.com/free-photo/modern-stationary-collection-arrangement_23-2149309643.jpg" },
+            { id: 18, name: "Sneakers", category: "fashion", price: 65.99, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGLB-hgOoO7hlwDvwxfIx7guwfprtC-NwP2w&s" },
+            { id: 19, name: "Dining Chair", category: "home", price: 89.99, image: "https://media.istockphoto.com/id/1404603483/photo/female-autumn-clothes-on-hangers-in-white-room.jpg?s=612x612&w=0&k=20&c=BI8is6qBwJW9-pJMB_nqT48vM9uU-9VqIjpNu1uUtpQ=" },
+            { id: 20, name: "Web Development Book", category: "books", price: 45.99, image: "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?cs=srgb&dl=pexels-pixabay-267301.jpg&fm=jpg" }
+        ];
+    
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+    
+        // Check if the productId is valid
+        if (productId) {
+            const product = products.find(p => p.id == productId);
+    
+            if (product) {
+                // Set product details dynamically
+                document.getElementById("product-name").innerText = product.name;
+                document.getElementById("product-description").innerText = product.description;
+                document.getElementById("product-price").innerText = `$${product.price}`;
+                document.getElementById("product-image").src = product.image;
+    
+                // Add to Cart functionality
+                document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+                    const quantity = document.getElementById("product-quantity").value || 1;
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({...product, quantity: parseInt(quantity)});
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`${product.name} added to cart`);
+                    window.location.href = "cart.html";
+                });
+            } else {
+                alert("Product not found!");
+            }
+        } else {
+            alert("Invalid product ID!");
+        }
+    
+        // Function to dynamically load related products based on the selected product's category
+        function loadRelatedProducts() {
+            const product = products.find(p => p.id == productId);
+            if (product) {
+                const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id);
+                const relatedProductsContainer = document.getElementById('related-products-container');
+                
+                relatedProducts.forEach(relatedProduct => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('col-md-3');
+                    productCard.innerHTML = 
+                        `<div class="related-product-card">
+                            <img src="${relatedProduct.image}" alt="Product Image">
+                            <div class="related-product-info">
+                                <h5>${relatedProduct.name}</h5>
+                                <p>$${relatedProduct.price}</p>
+                                <button class="btn" onclick="viewProductDetails(${relatedProduct.id})">View Details</button>
+                            </div>
+                        </div>`;
+                    relatedProductsContainer.appendChild(productCard);
+                });
+            }
+        }
+    
+        // Function to display the selected related product details and update Add to Cart button
+        function viewProductDetails(productId) {
+            const product = products.find(p => p.id == productId);
+            if (product) {
+                document.getElementById("product-name").innerText = product.name;
+                document.getElementById("product-description").innerText = product.description;
+                document.getElementById("product-price").innerText = `$${product.price}`;
+                document.getElementById("product-image").src = product.image;
+                
+                // Update Add to Cart functionality for the selected related product
+                const addToCartButton = document.getElementById("add-to-cart-btn");
+                addToCartButton.onclick = () => {
+                    const quantity = document.getElementById("product-quantity").value || 1;
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({...product, quantity: parseInt(quantity)});
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    alert(`${product.name} added to cart`);
+                    window.location.href = "cart.html";
+                };
+    
+                window.scrollTo({ top: document.getElementById("product-details").offsetTop, behavior: "smooth" });
+            }
+        }
+    
+        // Load related products on page load
+        loadRelatedProducts();
+    </script>
+    
+
+</body>
+</html>

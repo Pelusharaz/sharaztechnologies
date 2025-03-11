@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        #cart {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .cart-table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .cart-table thead {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .cart-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .cart-table td, .cart-table th {
+            padding: 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .cart-table .btn-remove {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cart-table .btn-remove:hover {
+            background-color: #e84118;
+        }
+
+        .total-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total-section .total-price {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        .cart-empty {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 50px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <section id="cart" class="cart section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shopping Cart</h2>
+                <p>Your selected items</p>
+            </div>
+
+            <!-- Cart Table -->
+            <div id="cart-items">
+                <table class="cart-table table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamically populated cart items will go here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total Section -->
+            <div class="total-section">
+                <span>Total</span>
+                <span id="cart-total" class="total-price">$0.00</span>
+            </div>
+
+            <!-- Checkout Button -->
+            <div class="text-center mt-4">
+                <button class="checkout-btn" ><a href="checkout.html" style="color: #fff;">Proceed to Checkout</a></button>
+            </div>
+
+            <!-- Empty Cart Message -->
+            <div id="empty-cart-message" class="cart-empty" style="display: none;">
+                <p>Your cart is empty. Start shopping now!</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Get cart data from localStorage
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+        // Display cart items in the table
+        function displayCartItems() {
+            const cartItemsContainer = document.querySelector("tbody");
+            const cartTotal = document.getElementById("cart-total");
+            cartItemsContainer.innerHTML = "";
+            let total = 0;
+    
+            if (cart.length === 0) {
+                document.getElementById("empty-cart-message").style.display = "block";
+                return;
+            } else {
+                document.getElementById("empty-cart-message").style.display = "none";
+            }
+    
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+    
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>$${item.price}</td>
+                    <td>
+                        <input type="number" class="form-control" value="${item.quantity}" min="1" max="99" data-id="${item.id}" onchange="updateQuantity(event)">
+                    </td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                    <td><button class="btn-remove" data-id="${item.id}" onclick="removeFromCart(event)">Remove</button></td>
+                `;
+                cartItemsContainer.appendChild(row);
+            });
+    
+            cartTotal.innerText = `$${total.toFixed(2)}`;
+        }
+    
+        // Remove item from cart
+        function removeFromCart(event) {
+            const productId = event.target.getAttribute("data-id");
+            // Filter out the product based on its ID
+            cart = cart.filter(item => item.id !== parseInt(productId)); // Ensures only one item is removed
+            localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to localStorage
+            displayCartItems(); // Update the cart display
+        }
+    
+        // Update quantity in cart
+        function updateQuantity(event) {
+            const productId = event.target.getAttribute("data-id");
+            const newQuantity = parseInt(event.target.value);
+            if (newQuantity < 1) {
+                event.target.value = 1;
+            }
+    
+            const product = cart.find(item => item.id === parseInt(productId));
+            if (product) {
+                product.quantity = newQuantity; // Update the quantity for the specific item
+                localStorage.setItem("cart", JSON.stringify(cart)); // Save updated cart to localStorage
+                displayCartItems(); // Update the cart display
+            }
+        }
+    
+        // Initialize cart display
+        displayCartItems();
+    </script>
+    
+
+</body>
+</html>

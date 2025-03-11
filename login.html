@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin-top: 40px;
+        }
+
+        #login {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .login-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .login-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .login-card input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #218838;
+        }
+
+        .sign-up-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .sign-up-link a {
+            color: #007bff;
+            font-size: 1rem;
+        }
+
+        .sign-up-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 767px) {
+            .login-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="login" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Login</h2>
+                <p>Welcome back, please log in to continue.</p>
+            </div>
+
+            <div class="login-card">
+                <h3>Login to Your Account</h3>
+                <form id="login-form">
+                    <input type="text" id="username-email" class="form-control" placeholder="Username or Email" required>
+                    <input type="password" id="password" class="form-control" placeholder="Password" required>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <div class="sign-up-link">
+                    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const usernameEmail = document.getElementById('username-email').value;
+            const password = document.getElementById('password').value;
+            // Perform the login logic here, e.g., check credentials
+            alert(`Logged in with ${usernameEmail}`);
+        });
+    </script>
+
+</body>
+</html>

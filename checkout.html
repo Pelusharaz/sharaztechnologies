@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Your Order</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin-top: 40px;
+        }
+
+        #checkout {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .cart-summary {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .cart-summary table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .cart-summary td, .cart-summary th {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .payment-method {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .payment-method h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .payment-method .form-group {
+            margin-bottom: 20px;
+        }
+
+        .payment-method input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .payment-btn {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .payment-btn:hover {
+            background-color: #218838;
+        }
+
+        .total-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .total-section .total-price {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .checkout-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .checkout-btn-container button {
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn-container button:hover {
+            background-color: #218838;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 767px) {
+            .cart-summary, .payment-method {
+                padding: 20px;
+            }
+
+            .total-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .total-section .total-price {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="checkout" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Checkout</h2>
+                <p>Please review your order before proceeding</p>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-summary-items">
+                        <!-- Dynamically populated cart items will go here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total Price -->
+            <div class="total-section">
+                <span>Total</span>
+                <span id="checkout-total" class="total-price">$0.00</span>
+            </div>
+
+            <!-- Payment Method Section -->
+            <div class="payment-method">
+                <h4>Choose Payment Method</h4>
+                <div class="form-group">
+                    <label for="payment-option">Payment Option</label>
+                    <select id="payment-option" class="form-control">
+                        <option value="till">Pay via Till Number</option>
+                        <option value="delivery">Pay on Delivery</option>
+                    </select>
+                </div>
+
+                <div id="till-method" class="form-group">
+                    <label for="till-number">Enter Till Number</label>
+                    <input type="text" id="till-number" class="form-control" placeholder="Enter Till Number" />
+                </div>
+
+                <div id="delivery-method" class="form-group" style="display: none;">
+                    <label for="delivery-instructions">Delivery Instructions</label>
+                    <textarea id="delivery-instructions" class="form-control" placeholder="Provide any special instructions"></textarea>
+                </div>
+
+                <button class="payment-btn" onclick="proceedToPayment()">Proceed to Payment</button>
+            </div>
+
+            <!-- Checkout Button -->
+            <div class="checkout-btn-container">
+                <button onclick="proceedToPayment()">Confirm and Proceed to Payment</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sample cart data
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Display cart items in the summary table
+        function displayCartSummary() {
+            const cartSummaryItems = document.getElementById("cart-summary-items");
+            const checkoutTotal = document.getElementById("checkout-total");
+            cartSummaryItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>$${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                `;
+                cartSummaryItems.appendChild(row);
+            });
+
+            checkoutTotal.innerText = `$${total.toFixed(2)}`;
+        }
+
+        // Toggle payment method fields based on the selected option
+        document.getElementById("payment-option").addEventListener("change", function() {
+            if (this.value === "till") {
+                document.getElementById("till-method").style.display = "block";
+                document.getElementById("delivery-method").style.display = "none";
+            } else {
+                document.getElementById("till-method").style.display = "none";
+                document.getElementById("delivery-method").style.display = "block";
+            }
+        });
+
+        // Proceed to payment
+        function proceedToPayment() {
+            const paymentMethod = document.getElementById("payment-option").value;
+            let paymentInfo = "";
+
+            if (paymentMethod === "till") {
+                const tillNumber = document.getElementById("till-number").value;
+                if (!tillNumber) {
+                    alert("Please enter a valid Till Number.");
+                    return;
+                }
+                paymentInfo = `Till Number: ${tillNumber}`;
+            } else {
+                const deliveryInstructions = document.getElementById("delivery-instructions").value;
+                paymentInfo = `Pay on Delivery. Delivery Instructions: ${deliveryInstructions}`;
+            }
+
+            alert(`Proceeding with payment: ${paymentInfo}`);
+            // Redirect or perform payment API call here
+        }
+
+        // Initialize cart display
+        displayCartSummary();
+    </script>
+
+</body>
+</html>

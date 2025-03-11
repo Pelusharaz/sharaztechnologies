@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharaz Mart</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Custom styling for the filter and product cards */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            margin-top: 38px;
+            background-color: #f8f9fa;
+        }
+
+        #products-grid {
+            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            margin-left: 30px;
+            max-height: 1000px; /* Add height limit */
+            overflow-y: scroll; /* Enable scrolling */
+            padding-right: 10px; /* Ensure no overflow */
+        }
+
+        .product-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #fff;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        .product-card {
+            padding: 0;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .category-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #007bff;
+            padding: 5px;
+        }
+
+        .category-link:hover {
+            text-decoration: underline;
+        }
+
+        .filter-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            position: sticky; /* Fix the sidebar */
+            top: 0;
+        }
+
+        .filter-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h5, .product-card p {
+            margin: 10px 0;
+        }
+
+        .product-count {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #007bff;
+        }
+
+        .add-to-cart-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Circular loading spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .loading-spinner div {
+            border: 2px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 767px) {
+            .filter-section {
+                margin-bottom: 20px;
+            }
+
+            .col-lg-3, .col-md-4 {
+                margin-bottom: 20px;
+            }
+            .filter-section {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+        }
+
+            /* Sidebar Styling */
+    .filter-section {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        max-width: 250px;
+    }
+
+    /* Sticky Sidebar */
+    .sticky-sidebar {
+        position: sticky;
+        top: 20px;
+    }
+
+    .filter-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .category-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        color: #555;
+        font-size: 14px;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Hover & Active Effects */
+    .category-link:hover,
+    .category-link.active {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        color: #fff;
+        transform: translateX(5px);
+    }
+
+    .category-link i {
+        font-size: 16px;
+    }
+
+    /* Mobile Collapsible Menu */
+    @media (max-width: 768px) {
+        #filterMenu {
+            display: none;
+        }
+
+        .filter-toggle {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Sharaz Mart Comprehensive Page -->
+    <section id="sharaz-mart" class="sharaz-mart section bg-light">
+        <div class="container-fluid">
+            <header id="header" class="header d-flex align-items-center fixed-top">
+                <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            
+                    <a href="index.html" class="logo d-flex align-items-center me-auto">
+                        <img src="assets/img/logo/sharaz-logo-removebg.png" alt="" class="sharaz-logo img-fluid" style="max-width: 800px; height: auto;">
+                        <h1 class="sitename">Sharaz Technologies</h1>
+                    </a>
+            
+                  <nav id="navmenu" class="navmenu">
+                    <ul>
+                      <li><a href="#hero" class="active">Home<br></a></li>
+                      <li><a href="#about">About</a></li>
+                      <li><a href="#services">Services</a></li>
+                      <li><a href="#portfolio">Portfolio</a></li>
+                      <li><a href="#team">Team</a></li>
+                      <li><a href="blog.html">Blog</a></li>
+                    
+                      <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+
+                    
+                  </nav>
+            
+                  <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+            
+                </div>
+              </header>
+            <!-- Filter and Sort Options -->
+            <div class="row mb-4">
+                <!-- Sidebar Filter -->
+                <div class="filter-section shadow-sm p-3 bg-white rounded sticky-sidebar">
+                    <h5 class="filter-title d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-filter me-2"></i>Filters</span>
+                        <button class="btn btn-sm d-md-none filter-toggle" id="toggleFilter">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </h5>
+                
+                    <ul class="list-unstyled filter-list mt-3 d-md-block d-none" id="filterMenu">
+                        <li><a href="#" class="category-link active" data-category="all"><i class="fas fa-border-all me-2"></i>All Categories</a></li>
+                        <li><a href="#" class="category-link" data-category="electronics"><i class="fas fa-tv me-2"></i>Electronics</a></li>
+                        <li><a href="#" class="category-link" data-category="clothes-accessories"><i class="fas fa-tshirt me-2"></i>Clothes & Accessories</a></li>
+                        <li><a href="#" class="category-link" data-category="shoes-bags"><i class="fas fa-shopping-bag me-2"></i>Shoes & Bags</a></li>
+                        <li><a href="#" class="category-link" data-category="home-equipments"><i class="fas fa-couch me-2"></i>Home Equipments</a></li>
+                        <li><a href="#" class="category-link" data-category="laptops"><i class="fas fa-laptop me-2"></i>Laptops</a></li>
+                        <li><a href="#" class="category-link" data-category="phones"><i class="fas fa-mobile-alt me-2"></i>Phones</a></li>
+                        <li><a href="#" class="category-link" data-category="appliances"><i class="fas fa-blender me-2"></i>Appliances</a></li>
+                        <li><a href="#" class="category-link" data-category="office-equipments"><i class="fas fa-briefcase me-2"></i>Office Equipments</a></li>
+                        <li><a href="#" class="category-link" data-category="kitchen-utensils"><i class="fas fa-utensils me-2"></i>Kitchen Utensils</a></li>
+                        <li><a href="#" class="category-link" data-category="travel-equipments"><i class="fas fa-suitcase-rolling me-2"></i>Travel Equipments</a></li>
+                        <li><a href="#" class="category-link" data-category="beauty"><i class="fas fa-magic me-2"></i>Beauty & Personal Care</a></li>
+                        <li><a href="#" class="category-link" data-category="sports"><i class="fas fa-dumbbell me-2"></i>Sports & Fitness</a></li>
+                        <li><a href="#" class="category-link" data-category="toys"><i class="fas fa-puzzle-piece me-2"></i>Toys & Games</a></li>
+                        <li><a href="#" class="category-link" data-category="automotive"><i class="fas fa-car me-2"></i>Automotive</a></li>
+                        <li><a href="#" class="category-link" data-category="books"><i class="fas fa-book me-2"></i>Books</a></li>
+                        <li><a href="#" class="category-link" data-category="grocery"><i class="fas fa-shopping-basket me-2"></i>Grocery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Products Grid Section -->
+                <div class="col-lg-9 col-md-8">
+                    <div class="row mb-4">
+                        <div class="col-md-2 mt-4">
+                            <h5>Sort By</h5>
+                            <select class="form-control" id="sort-products">
+                                <option value="default">Default</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner" id="loading-spinner">
+                        <div></div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="row gy-4" id="products-grid" data-aos="fade-up" data-aos-delay="300">
+                        <!-- Dynamically populated product items will go here -->
+                    </div>
+
+                    <div class="product-count" id="product-count"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+const products = [
+    // Electronics
+    { id: 1, name: "Smartphone X", category: "electronics", price: 299.99, image: "https://img.freepik.com/free-photo/modern-smartphone-arrangement_23-2149309643.jpg" },
+    { id: 2, name: "Wireless Headphones", category: "electronics", price: 99.99, image: "https://img.freepik.com/free-photo/headphones-minimalist-style_23-2149309643.jpg" },
+    { id: 3, name: "Camera Lens", category: "electronics", price: 299.99, image: "https://img.freepik.com/free-photo/camera-lens-digital-photography_23-2149309643.jpg" },
+
+    // Laptops
+    { id: 4, name: "Laptop Pro", category: "laptops", price: 1199.99, image: "https://img.freepik.com/free-photo/laptop-on-table-modern-setup_23-2149309643.jpg" },
+    { id: 5, name: "Gaming Laptop", category: "laptops", price: 1499.99, image: "https://img.freepik.com/free-photo/gaming-laptop-setup_23-2149309643.jpg" },
+
+    // Phones
+    { id: 6, name: "iPhone 14", category: "phones", price: 899.99, image: "https://img.freepik.com/free-photo/new-smartphone-model-display_23-2149309643.jpg" },
+    { id: 7, name: "Samsung Galaxy S22", category: "phones", price: 799.99, image: "https://img.freepik.com/free-photo/samsung-galaxy-phone_23-2149309643.jpg" },
+
+    // Fashion (Clothes & Accessories)
+    { id: 8, name: "Leather Jacket", category: "clothes-accessories", price: 149.99, image: "https://img.freepik.com/free-photo/leather-jacket-men-style_23-2149309643.jpg" },
+    { id: 9, name: "Casual Shirt", category: "clothes-accessories", price: 39.99, image: "https://img.freepik.com/free-photo/mens-casual-shirt-trendy_23-2149309643.jpg" },
+
+    // Shoes & Bags
+    { id: 10, name: "Fashionable Sneakers", category: "shoes-bags", price: 79.99, image: "https://img.freepik.com/free-photo/stylish-sneakers-footwear_23-2149309643.jpg" },
+    { id: 11, name: "Leather Handbag", category: "shoes-bags", price: 119.99, image: "https://img.freepik.com/free-photo/leather-handbag-classic_23-2149309643.jpg" },
+
+    // Home Equipments
+    { id: 12, name: "Sofa Set", category: "home-equipments", price: 799.99, image: "https://img.freepik.com/free-photo/modern-sofa-furniture_23-2149309643.jpg" },
+    { id: 13, name: "Dining Set", category: "home-equipments", price: 499.99, image: "https://img.freepik.com/free-photo/dining-room-furniture_23-2149309643.jpg" },
+
+    // Appliances
+    { id: 14, name: "Smart Refrigerator", category: "appliances", price: 899.99, image: "https://img.freepik.com/free-photo/smart-fridge-modern-kitchen_23-2149309643.jpg" },
+    { id: 15, name: "Washing Machine", category: "appliances", price: 699.99, image: "https://img.freepik.com/free-photo/washing-machine-home_23-2149309643.jpg" },
+
+    // Office Equipments
+    { id: 16, name: "Office Chair", category: "office-equipments", price: 129.99, image: "https://img.freepik.com/free-photo/modern-office-chair_23-2149309643.jpg" },
+    { id: 17, name: "Ergonomic Desk", category: "office-equipments", price: 349.99, image: "https://img.freepik.com/free-photo/modern-office-desk_23-2149309643.jpg" },
+
+    // Kitchen Utensils
+    { id: 18, name: "Non-Stick Cookware Set", category: "kitchen-utensils", price: 199.99, image: "https://img.freepik.com/free-photo/cookware-set-kitchen_23-2149309643.jpg" },
+    { id: 19, name: "Chef’s Knife Set", category: "kitchen-utensils", price: 89.99, image: "https://img.freepik.com/free-photo/chefs-knife-set-kitchen_23-2149309643.jpg" },
+
+    // Travel Equipments
+    { id: 20, name: "Rolling Suitcase", category: "travel-equipments", price: 249.99, image: "https://img.freepik.com/free-photo/rolling-suitcase-travel_23-2149309643.jpg" },
+    { id: 21, name: "Travel Backpack", category: "travel-equipments", price: 79.99, image: "https://img.freepik.com/free-photo/travel-backpack-adventure_23-2149309643.jpg" },
+
+    // Books
+    { id: 22, name: "Coding for Beginners", category: "books", price: 29.99, image: "https://img.freepik.com/free-photo/programming-book-cover_23-2149309643.jpg" },
+    { id: 23, name: "Advanced JavaScript", category: "books", price: 25.99, image: "https://img.freepik.com/free-photo/javascript-book-programming_23-2149309643.jpg" },
+
+    // Beauty & Personal Care
+    { id: 24, name: "Makeup Kit", category: "beauty", price: 49.99, image: "https://img.freepik.com/free-photo/makeup-kit-cosmetics_23-2149309643.jpg" },
+    { id: 25, name: "Hair Dryer", category: "beauty", price: 59.99, image: "https://img.freepik.com/free-photo/hair-dryer-professional_23-2149309643.jpg" },
+
+    // Sports & Fitness
+    { id: 26, name: "Dumbbell Set", category: "sports", price: 89.99, image: "https://img.freepik.com/free-photo/dumbbells-fitness-equipment_23-2149309643.jpg" },
+    { id: 27, name: "Yoga Mat", category: "sports", price: 29.99, image: "https://img.freepik.com/free-photo/yoga-mat-exercise_23-2149309643.jpg" },
+
+    // Automotive
+    { id: 28, name: "Car Vacuum Cleaner", category: "automotive", price: 45.99, image: "https://img.freepik.com/free-photo/car-vacuum-cleaner_23-2149309643.jpg" },
+    { id: 29, name: "Dash Camera", category: "automotive", price: 129.99, image: "https://img.freepik.com/free-photo/dash-camera-car_23-2149309643.jpg" },
+
+    // Grocery
+    { id: 30, name: "Organic Fruit Basket", category: "grocery", price: 39.99, image: "https://img.freepik.com/free-photo/organic-fruit-basket_23-2149309643.jpg" },
+    { id: 31, name: "Whole Bean Coffee", category: "grocery", price: 19.99, image: "https://img.freepik.com/free-photo/coffee-beans-packaging_23-2149309643.jpg" }
+];
+
+        function displayProducts(products) {
+            const productGrid = document.getElementById("products-grid");
+            productGrid.innerHTML = "";
+            const loadingSpinner = document.getElementById("loading-spinner");
+            loadingSpinner.style.display = "block"; // Show loading spinner
+
+            setTimeout(() => {
+                products.forEach(product => {
+                    const productCard = document.createElement("div");
+                    productCard.classList.add("product-item");
+                    productCard.innerHTML = `
+                        <div class="product-card">
+                            <a href="productpage.html?id=${product.id}">
+                                <img src="${product.image}" class="img-fluid" alt="${product.name}">
+                            </a>
+                            <p>${product.name}</p>
+                            <p>$${product.price}</p>
+                        </div>
+                    `;
+                    productGrid.appendChild(productCard);
+                });
+
+                loadingSpinner.style.display = "none"; // Hide loading spinner after loading products
+            }, 500); // Simulate a delay for loading
+        }
+
+
+        // Sorting functionality
+        document.getElementById("sort-products").addEventListener("change", (e) => {
+            const value = e.target.value;
+            if (value === "price-asc") {
+                products.sort((a, b) => a.price - b.price);
+            } else if (value === "price-desc") {
+                products.sort((a, b) => b.price - a.price);
+            }
+            displayProducts(products);
+        });
+
+        // Category filtering
+        document.querySelectorAll(".category-link").forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const category = e.target.getAttribute("data-category");
+                const filteredProducts = category === "all" ? products : products.filter(p => p.category === category);
+                displayProducts(filteredProducts);
+            });
+        });
+
+        // Initialize cart and display products
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        displayProducts(products);
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            alert(`${product.name} added to cart`);
+            updateCart();
+        }
+
+        // Update cart display
+        function updateCart() {
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        // Event listener for "Add to Cart" buttons
+        document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+            button.addEventListener("click", (e) => {
+                const productId = parseInt(e.target.getAttribute("data-product-id"));
+
+                console.log(productId);
+                addToCart(productId);
+            });
+        });
+    </script>
+
+
+<script>
+    document.getElementById('toggleFilter').addEventListener('click', function() {
+        let menu = document.getElementById('filterMenu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        } else {
+            menu.style.display = 'block';
+        }
+    });
+</script>
+
+      <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
