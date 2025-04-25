@@ -18,10 +18,10 @@
       margin-left:10px!important;
       display:flex!important;
     }
-
-
-  /* Footer */
   }
+
+  
+  /* Footer */
   .footer-contact i {
     color: var(--accent-color)!important;
     margin-right: 5px!important;
@@ -32,9 +32,4 @@
   }
   .footer-contact a:hover {
     color: var(--accent-color)!important;
-  }
-
-
-  .client-logo img{
-    width:120%!important;
   }
