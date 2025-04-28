@@ -1,0 +1,227 @@
+/*--------------------------------------------------------------
+    #Header styles
+  --------------------------------------------------------------*/
+.small-screen{
+  display:none!important;
+}
+.mart-cart{
+  margin-right: 10px;
+}
+@media only screen and (max-width: 700px) {
+    .large-screen{
+      display:none;
+    }
+    h1.sitename{
+      font-size: 110%!important;
+      margin-left: -20px!important;
+    }
+    .small-screen{
+      width: 50%;
+      margin-left:10px!important;
+      display:flex!important;
+    }
+  }
+  /*--------------------------------------------------------------
+    #End Header styles
+  --------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+#How it works
+--------------------------------------------------------------*/
+.process-section {
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: -80px;
+}
+.process-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: -30px;
+  position: relative;
+}
+.process-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background-color: #4f46e5;
+  margin: 10px auto 0;
+}
+.rocket-img {
+  position: absolute;
+  top: 80px;
+  left: 15%;
+  width: 250px;
+  transform: translate(-50%, -50%);
+  animation: float 3s ease-in-out infinite;
+  z-index: 10;
+}
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+.row-wrapper {
+  position: relative;
+  margin-top: -30px;
+  padding-top: 80px;
+}
+.dotted-curve-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 130px;
+  width: 100%;
+  height: 150px;
+  z-index: 0;
+  pointer-events: none;
+}
+.step {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.step-number {
+  font-size: 2rem;
+  background-color: #0dcaf0;
+  color: white;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.step-number:hover{
+  background-color: #fd7e14;
+}
+.step-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+.step-description {
+  color: #6c757d;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+  .rocket-img {
+    left: 50%;
+    top:-10px;
+    width: 150px;
+  }
+  .dotted-curve-wrapper {
+    display: none;
+  }
+}
+/*--------------------------------------------------------------
+#End how it works
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+#successful projects
+--------------------------------------------------------------*/
+.highlight {
+  background-color: #d7e3ff;
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.main-heading {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+}
+.main-heading span {
+  background: #c3d4ff;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+.description {
+  color: #666;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+.stats {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.stats-text {
+  font-size: 16px;
+  color: #555;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+}
+/* Modal */
+.modal-img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+.modal-backdrop {
+  background: rgba(0,0,0,0.7);
+}
+@media (max-width: 768px) {
+  .main-heading {
+    font-size: 36px;
+  }
+  .description {
+    font-size: 16px;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*--------------------------------------------------------------
+#end successful projects
+--------------------------------------------------------------*/
+
+  
+  /*--------------------------------------------------------------
+    #Footer
+  --------------------------------------------------------------*/
+  .footer-contact i {
+    color: var(--accent-color)!important;
+    margin-right: 3px!important;
+  }
+  .footer-contact a {
+    color: color-mix(in srgb, var(--default-color), transparent 20%) !important;
+    font-size:14px!important;
+  }
+  .footer-contact a:hover {
+    color: var(--accent-color)!important;
+  }
+  /*--------------------------------------------------------------
+    #End Footer styles
+  --------------------------------------------------------------*/
+

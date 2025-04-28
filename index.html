@@ -26,7 +26,11 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/add.css" rel="stylesheet">
+  <link href="assets/css/extra.css" rel="stylesheet">
+
+  <!-- How it works CSS
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 
 </head>
@@ -86,6 +90,68 @@
       </div>
 
     </section><!-- /Hero Section -->
+
+<!-- Clients Section -->
+<section id="clients" class="clients section">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Clients</h2>
+    <p>We work with the best clients<br></p>
+  </div><!-- End Section Title -->
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <div class="swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": true,
+          "speed": 600,
+          "autoplay": {
+            "delay": 5000
+          },
+          "slidesPerView": "auto",
+          "pagination": {
+            "el": ".swiper-pagination",
+            "type": "bullets",
+            "clickable": true
+          },
+          "breakpoints": {
+            "320": {
+              "slidesPerView": 2,
+              "spaceBetween": 40
+            },
+            "480": {
+              "slidesPerView": 3,
+              "spaceBetween": 60
+            },
+            "640": {
+              "slidesPerView": 4,
+              "spaceBetween": 80
+            },
+            "992": {
+              "slidesPerView": 6,
+              "spaceBetween": 120
+            }
+          }
+        }
+      </script>
+      <div class="swiper-wrapper align-items-center">
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/nami-logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Beacon_of_foundation_logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Boem_Electricals_logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Goldenchance_logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Kempa_travel_logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Phoenix_Explorers_Logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/Alice_s_closet_Logo.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide client-logo"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+  </div>
+
+</section><!-- /Clients Section -->
 
 <!-- About Section -->
 <section id="about" class="about section">
@@ -299,6 +365,83 @@
 
 </section><!-- /Features Section -->
 
+<!-- How it works section-->
+<section class="process-section">
+  <div class="container position-relative">
+    
+    <img src="assets/img/rocket.png" alt="Rocket" class="rocket-img img-fluid">
+    
+    <!-- Section Title -->
+    <div class="container section-title process-title" data-aos="fade-up">
+      <h2>How it Works</h2>
+      <p>The process — Behind the scenes.<br></p>
+    </div><!-- End Section Title -->
+
+    <div class="row-wrapper">
+
+      <!-- Dotted Curves -->
+      <div class="dotted-curve-wrapper">
+        <svg width="100%" height="150" viewBox="0 0 1200 150">
+          <!-- From Step 1 to Step 2 -->
+          <path d="M 80 50 Q 130 0, 230 50" 
+            stroke="#cccccc" 
+            stroke-width="3" 
+            fill="transparent" 
+            stroke-dasharray="8,8" />
+          
+          <!-- From Step 2 to Step 3 -->
+          <path d="M 400 50 Q 450 90, 550 50" 
+            stroke="#cccccc" 
+            stroke-width="3" 
+            fill="transparent" 
+            stroke-dasharray="8,8" />
+          
+          <!-- From Step 3 to Step 4 -->
+          <path d="M 705 50 Q 755 0, 855 50" 
+            stroke="#cccccc" 
+            stroke-width="3" 
+            fill="transparent" 
+            stroke-dasharray="8,8" />
+        </svg>
+      </div>
+
+      <!-- Steps -->
+      <div class="row justify-content-center">
+
+        <div class="col-12 col-md-3 step">
+          <div class="step-number">1</div>
+          <h5 class="step-title">Discovery & Consultation</h5>
+          <p class="step-description">Understand your needs through detailed analysis.</p>
+        </div>
+
+        <div class="col-12 col-md-3 step">
+          <div class="step-number">2</div>
+          <h5 class="step-title">Custom Solution Design</h5>
+          <p class="step-description">Tailor solutions based on your goals.</p>
+        </div>
+
+        <div class="col-12 col-md-3 step">
+          <div class="step-number">3</div>
+          <h5 class="step-title">Development & Integration</h5>
+          <p class="step-description">Agile development with rigorous testing.</p>
+        </div>
+
+        <div class="col-12 col-md-3 step">
+          <div class="step-number">4</div>
+          <h5 class="step-title">Deployment & Support</h5>
+          <p class="step-description">Seamless deployment and ongoing support.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- /How it works -->
+
 
 <!-- Alt Features Section -->
 <section id="alt-features" class="alt-features section">
@@ -321,7 +464,7 @@
             <i class="bi bi-mortarboard"></i>
             <div>
               <h4>Education</h4>
-              <p>Consequences are either certain or almost like something that can be enjoyed with minimal effort</p>
+              <p>Empowering learning with smart, innovative tech solutions.</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -329,7 +472,7 @@
             <i class="bi bi-cart-check"></i>
             <div>
               <h4>Ecommerce</h4>
-              <p>Exemption is a result of actions that may be left incomplete but are still beneficial for all</p>
+              <p>Optimizing digital commerce with robust, scalable platforms.</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -337,7 +480,7 @@
             <i class="bi bi-bandaid"></i>
             <div>
               <h4>Healthcare</h4>
-              <p>Seeking solutions with dedication will always bear fruit, no matter the difficulty</p>
+              <p>Revolutionize patient care with world-class healthcare innovations.</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -345,7 +488,7 @@
             <i class="bi bi-house-door"></i>
             <div>
               <h4>Real Estate</h4>
-              <p>True success is achieved only when honesty and effort are consistently applied</p>
+              <p>Showcase prestigious properties with high-end digital solutions. Close deals quicker with real estate tech that moves with you!</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -353,7 +496,7 @@
             <i class="bi bi-luggage-fill"></i>
             <div>
               <h4>Tours & Travel</h4>
-              <p>Challenges are unavoidable, but we endure with strength and patience to face them</p>
+              <p>Transform travel experiences with dynamic booking and management solutions.Offer unforgettable journeys powered by bespoke technology.</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -361,7 +504,7 @@
             <i class="bi bi-gear"></i>
             <div>
               <h4>Customized Solutions</h4>
-              <p>Understanding and addressing core issues will bring clarity and solutions to problems</p>
+              <p>Need something unique? We’ll build tech that's 100% you!</p>
             </div>
           </div><!-- End Feature Item -->
 
@@ -378,6 +521,90 @@
   </div>
 
 </section><!-- /Alt Features Section -->
+
+<!-- successful projects -->
+<div class="container">
+  <div class="row align-items-center">
+    <!-- Left Text Side -->
+    <div class="col-lg-5 mb-5">
+      <div class="highlight">Visualizing Your Ideas</div>
+      <h1 class="main-heading">
+        Some of our top<br> <span>Accomplishments.</span>
+      </h1>
+      <p class="description">
+        Innovative solutions trusted by industry leaders globally. Join the ranks of top companies relying on our excellence and reliability.
+      </p>
+      <div class="row">
+        <div class="col-6">
+          <div class="stats">10+</div>
+          <div class="stats-text">Companies Trust Sharaz</div>
+        </div>
+        <div class="col-6">
+          <div class="stats">4.9</div>
+          <div class="stats-text">Customer Satisfaction</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Gallery Side -->
+    <div class="col-lg-7">
+      <div class="gallery">
+        <img src="assets/img/clients/Nami-Petgroomers .png" alt="Project 1" onclick="openModal(0)">
+        <img src="assets/img/clients/Beacon-of-Compassion-Home.png" alt="Project 2" onclick="openModal(1)">
+        <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" onclick="openModal(2)">
+        <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4" onclick="openModal(3)">
+        <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5" onclick="openModal(4)">
+        <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" onclick="openModal(5)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Viewer -->
+<div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered text-center">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-body">
+        <img id="modalImage" src="" class="modal-img mb-3" alt="Zoomed Image">
+        <div>
+          <button class="btn btn-light me-2" onclick="prevImage()">← Prev</button>
+          <button class="btn btn-light" onclick="nextImage()">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const images = [
+    "assets/img/clients/Nami-Petgroomers .png",
+    "assets/img/clients/Beacon-of-Compassion-Home.png",
+    "https://via.placeholder.com/800x600?text=Project+3",
+    "https://via.placeholder.com/800x600?text=Project+4",
+    "https://via.placeholder.com/800x600?text=Project+5",
+    "https://via.placeholder.com/800x600?text=Project+6"
+  ];
+  let currentImage = 0;
+
+  function openModal(index) {
+    currentImage = index;
+    document.getElementById('modalImage').src = images[currentImage];
+    new bootstrap.Modal(document.getElementById('galleryModal')).show();
+  }
+
+  function nextImage() {
+    currentImage = (currentImage + 1) % images.length;
+    document.getElementById('modalImage').src = images[currentImage];
+  }
+
+  function prevImage() {
+    currentImage = (currentImage - 1 + images.length) % images.length;
+    document.getElementById('modalImage').src = images[currentImage];
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ <!-- /successful projets -->
 
 <!-- Services Section -->
 <section id="services" class="services section bg-light">
@@ -997,69 +1224,6 @@
   </div>
 
 </section><!-- /Team Section -->
-
-<!-- Clients Section -->
-<section id="clients" class="clients section">
-
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Clients</h2>
-    <p>We work with the best clients<br></p>
-  </div><!-- End Section Title -->
-
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-    <div class="swiper init-swiper">
-      <script type="application/json" class="swiper-config">
-        {
-          "loop": true,
-          "speed": 600,
-          "autoplay": {
-            "delay": 5000
-          },
-          "slidesPerView": "auto",
-          "pagination": {
-            "el": ".swiper-pagination",
-            "type": "bullets",
-            "clickable": true
-          },
-          "breakpoints": {
-            "320": {
-              "slidesPerView": 2,
-              "spaceBetween": 40
-            },
-            "480": {
-              "slidesPerView": 3,
-              "spaceBetween": 60
-            },
-            "640": {
-              "slidesPerView": 4,
-              "spaceBetween": 80
-            },
-            "992": {
-              "slidesPerView": 6,
-              "spaceBetween": 120
-            }
-          }
-        }
-      </script>
-      <div class="swiper-wrapper align-items-center">
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Alice_s_closet_Logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Beacon_of_foundation_logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Boem_Electricals_logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Goldenchance_logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Kempa_travel_logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/Phoenix_Explorers_Logo.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-        <div class="swiper-slide client-logo"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-
-  </div>
-
-</section><!-- /Clients Section -->
-
 
 <!-- Recent Posts Section -->
 <section id="recent-posts" class="recent-posts section">
