@@ -51,17 +51,65 @@
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#recent-posts">Blogs</a></li>
           <li><a href="#contact">Contact</a></li>
 
-          <li><a class="small-screen btn-getstarted flex-md-shrink-0" href="mart.html" style="color: lightblue;"><i class="bi bi-cart"></i>Sharaz Mart</a></li>
+          <li><a class="small-screen btn-getstarted flex-md-shrink-0" href="mart.html" style="color: white;"><i class="bi bi-cart smallscreen-mart-cart"></i>Sharaz Mart</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted flex-md-shrink-0 large-screen" href="mart.html" style="color: lightblue;"><i class="bi bi-cart mart-cart"></i>Sharaz Mart</a>
+      <a class="btn-getstarted flex-md-shrink-0 large-screen" href="mart.html" style="color: white;"><i class="bi bi-cart mart-cart"></i>Sharaz Mart</a>
 
     </div>
+
+    <!-- Bottom Nav -->
+  <nav class="bottom-nav" id="bottomNav">
+    <a href="#technologies" class="nav-link active">Technologies</a>
+    <a href="#industries" class="nav-link">Industries</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#testimonials" class="nav-link">Testimonials</a>
+    <a href="#solutions" class="nav-link">Solutions</a>
+  </nav>
+
+  <!-- JavaScript for Active Link -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".bottom-nav .nav-link");
+  
+    // Function to update active link based on scroll
+    function updateActiveLink() {
+      let currentSection = "";
+  
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120; // offset for early highlight
+        const sectionHeight = section.offsetHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+  
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(currentSection)) {
+          link.classList.add("active");
+        }
+      });
+    }
+  
+    // Scroll listener
+    window.addEventListener("scroll", updateActiveLink);
+  
+    // Click listener
+    navLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        // Small timeout to let the browser scroll before checking position
+        setTimeout(updateActiveLink, 100);
+      });
+    });
+  </script>
+  
+  
   </header>
 
 
@@ -295,7 +343,7 @@
     </section><!-- /Stats Section -->
 
  <!-- Features Section -->
- <section id="features" class="features section">
+ <section id="technologies" class="features section">
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
@@ -444,7 +492,7 @@
 
 
 <!-- Alt Features Section -->
-<section id="alt-features" class="alt-features section">
+<section id="industries" class="alt-features section">
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
@@ -537,10 +585,16 @@
       <div class="row">
         <div class="col-6">
           <div class="stats">10+</div>
-          <div class="stats-text">Companies Trust Sharaz</div>
+          <div class="projects-stars stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <div class="stats-text">Companies that Trust Sharaz</div>
         </div>
         <div class="col-6">
           <div class="stats">4.9</div>
+          <div class="projects-stars stars">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
           <div class="stats-text">Customer Satisfaction</div>
         </div>
       </div>
@@ -551,10 +605,10 @@
       <div class="gallery">
         <img src="assets/img/clients/Nami-Petgroomers .png" alt="Project 1" onclick="openModal(0)">
         <img src="assets/img/clients/Beacon-of-Compassion-Home.png" alt="Project 2" onclick="openModal(1)">
-        <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" onclick="openModal(2)">
+        <!-- <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" onclick="openModal(2)">
         <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4" onclick="openModal(3)">
         <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5" onclick="openModal(4)">
-        <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" onclick="openModal(5)">
+        <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" onclick="openModal(5)"> -->
       </div>
     </div>
   </div>

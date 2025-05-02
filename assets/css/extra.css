@@ -7,6 +7,7 @@
 .mart-cart{
   margin-right: 10px;
 }
+
 @media only screen and (max-width: 700px) {
     .large-screen{
       display:none;
@@ -16,11 +17,73 @@
       margin-left: -20px!important;
     }
     .small-screen{
-      width: 50%;
+      width: 40%;
       margin-left:10px!important;
       display:flex!important;
     }
+    .smallscreen-mart-cart{
+      margin:0px 0px 0px -10px !important;
+    }
   }
+
+  /* bottom navbar */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Bottom Fixed Nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 999px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 10px 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .bottom-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+
+  .bottom-nav a:hover {
+    background-color: #f0f0f0;
+  }
+
+  .bottom-nav a.active {
+    background-color: #0d0b66;
+    color: white;
+  }
+
+  /* Responsive for small screens */
+  @media (max-width: 600px) {
+    .bottom-nav {
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 8px 14px;
+      width: 90%;
+    }
+
+    .bottom-nav a {
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+  }
+
   /*--------------------------------------------------------------
     #End Header styles
   --------------------------------------------------------------*/
@@ -89,7 +152,7 @@
 }
 .step-number {
   font-size: 2rem;
-  background-color: #0dcaf0;
+  background-color: var(--accent-color);
   color: white;
   width: 60px;
   height: 60px;
@@ -133,6 +196,7 @@
 .highlight {
   background-color: #d7e3ff;
   display: inline-block;
+  color: var(--accent-color);
   padding: 0 8px;
   border-radius: 5px;
   font-size: 14px;
@@ -143,7 +207,7 @@
 .main-heading {
   font-size: 48px;
   font-weight: 700;
-  color: var(--accent-color);
+  color: var(--heading-color);
   margin-bottom: 20px;
 }
 .main-heading span {
@@ -164,6 +228,10 @@
 .stats-text {
   font-size: 16px;
   color: #555;
+}
+.projects-stars{
+  color: #ffc107;
+  margin: 0 1px;
 }
 .gallery {
   display: grid;
