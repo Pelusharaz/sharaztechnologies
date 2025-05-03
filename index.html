@@ -32,6 +32,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
+  <!-- pricing -->
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
 </head>
 
@@ -64,51 +67,13 @@
     </div>
 
     <!-- Bottom Nav -->
-  <nav class="bottom-nav" id="bottomNav">
-    <a href="#technologies" class="nav-link active">Technologies</a>
-    <a href="#industries" class="nav-link">Industries</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="#testimonials" class="nav-link">Testimonials</a>
-    <a href="#solutions" class="nav-link">Solutions</a>
-  </nav>
-
-  <!-- JavaScript for Active Link -->
-  <script>
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".bottom-nav .nav-link");
-  
-    // Function to update active link based on scroll
-    function updateActiveLink() {
-      let currentSection = "";
-  
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120; // offset for early highlight
-        const sectionHeight = section.offsetHeight;
-        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-          currentSection = section.getAttribute("id");
-        }
-      });
-  
-      navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href").includes(currentSection)) {
-          link.classList.add("active");
-        }
-      });
-    }
-  
-    // Scroll listener
-    window.addEventListener("scroll", updateActiveLink);
-  
-    // Click listener
-    navLinks.forEach(link => {
-      link.addEventListener("click", (e) => {
-        // Small timeout to let the browser scroll before checking position
-        setTimeout(updateActiveLink, 100);
-      });
-    });
-  </script>
-  
+    <nav class="bottom-nav" id="bottomNav">
+      <a href="#technologies" class="nav-link active">Technologies</a>
+      <a href="#industries" class="nav-link">Industries</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#testimonials" class="nav-link">Testimonials</a>
+      <a href="#solutions" class="nav-link">Solutions</a>
+    </nav>
   
   </header>
 
@@ -123,9 +88,9 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <h1 data-aos="fade-up">Offering Smart solutions To Catalyse your Growth</h1>
             <p data-aos="fade-up" data-aos-delay="100" class="fs-6">We believe that technology should support and 
-               enhance your organisation's success, not constrain it. With our wide range of best-in-class 
-               services, we provide customized solutions that fit your unique IT needs. We are committed in 
-               excelling at our Job so you can focus at doing yours.</p>
+              enhance your organisation's success, not constrain it. With our wide range of best-in-class 
+              services, we provide customized solutions that fit your unique IT needs. We are committed in 
+              excelling at our Job so you can focus at doing yours.</p>
             <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
               <!--<a href="#about" class="btn-get-started">Get Started <i class="bi bi-arrow-right"></i></a>-->
           
@@ -342,8 +307,8 @@
 
     </section><!-- /Stats Section -->
 
- <!-- Features Section -->
- <section id="technologies" class="features section">
+<!-- Features Section -->
+<section id="technologies" class="features section">
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
@@ -603,62 +568,106 @@
     <!-- Right Gallery Side -->
     <div class="col-lg-7">
       <div class="gallery">
-        <img src="assets/img/clients/Nami-Petgroomers .png" alt="Project 1" onclick="openModal(0)">
+        <img src="assets/img/clients/Nami-Petgroomers.png" alt="Project 1" onclick="openModal(0)">
         <img src="assets/img/clients/Beacon-of-Compassion-Home.png" alt="Project 2" onclick="openModal(1)">
-        <!-- <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" onclick="openModal(2)">
-        <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4" onclick="openModal(3)">
-        <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5" onclick="openModal(4)">
-        <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" onclick="openModal(5)"> -->
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Viewer -->
+
+<!-- Modal Structure -->
 <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered text-center">
-    <div class="modal-content bg-transparent border-0">
-      <div class="modal-body">
-        <img id="modalImage" src="" class="modal-img mb-3" alt="Zoomed Image">
-        <div>
-          <button class="btn btn-light me-2" onclick="prevImage()">← Prev</button>
-          <button class="btn btn-light" onclick="nextImage()">Next →</button>
-        </div>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content border-0 bg-transparent position-relative">
+
+      <!-- Icons (Top-right corner) -->
+      <div class="position-absolute top-0 end-0 p-3 z-3 d-flex gap-3">
+        <!-- Download icon -->
+        <a id="downloadBtn" class="text-white fs-4" download target="_blank" title="Download">
+          <i class="bi bi-download"></i>
+        </a>
+        <!-- Share icon -->
+        <button class="btn text-white fs-4" onclick="shareImage()" title="Share">
+          <i class="bi bi-share-fill"></i>
+        </button>
+        <!-- Close icon -->
+        <button class="btn text-white fs-4" data-bs-dismiss="modal" title="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
       </div>
+
+      <!-- Image Display -->
+      <div class="modal-body text-center p-0">
+        <img id="modalImage" src="" class="img-fluid rounded shadow" style="max-height: 90vh;" alt="Gallery Image">
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button onclick="prevImage()" class="btn btn-light position-absolute start-0 top-50 translate-middle-y rounded-circle shadow">‹</button>
+      <button onclick="nextImage()" class="btn btn-light position-absolute end-0 top-50 translate-middle-y rounded-circle shadow">›</button>
+
     </div>
   </div>
 </div>
+
+
 
 <script>
   const images = [
-    "assets/img/clients/Nami-Petgroomers .png",
-    "assets/img/clients/Beacon-of-Compassion-Home.png",
-    "https://via.placeholder.com/800x600?text=Project+3",
-    "https://via.placeholder.com/800x600?text=Project+4",
-    "https://via.placeholder.com/800x600?text=Project+5",
-    "https://via.placeholder.com/800x600?text=Project+6"
+  "assets/img/clients/Nami-Petgroomers.png",
+  "assets/img/clients/Beacon-of-Compassion-Home.png"
   ];
+
   let currentImage = 0;
 
   function openModal(index) {
-    currentImage = index;
-    document.getElementById('modalImage').src = images[currentImage];
-    new bootstrap.Modal(document.getElementById('galleryModal')).show();
+  currentImage = index;
+  updateModalImage();
+  new bootstrap.Modal(document.getElementById('galleryModal')).show();
   }
 
   function nextImage() {
-    currentImage = (currentImage + 1) % images.length;
-    document.getElementById('modalImage').src = images[currentImage];
+  currentImage = (currentImage + 1) % images.length;
+  updateModalImage();
   }
 
   function prevImage() {
-    currentImage = (currentImage - 1 + images.length) % images.length;
-    document.getElementById('modalImage').src = images[currentImage];
+  currentImage = (currentImage - 1 + images.length) % images.length;
+  updateModalImage();
+  }
+
+  function updateModalImage() {
+  const imgSrc = images[currentImage];
+  document.getElementById('modalImage').src = imgSrc;
+  document.getElementById('downloadBtn').href = imgSrc;
+  }
+
+  // Optional: Keyboard support
+  document.addEventListener("keydown", (e) => {
+  const modal = document.getElementById('galleryModal');
+  if (modal.classList.contains('show')) {
+  if (e.key === "ArrowRight") nextImage();
+  if (e.key === "ArrowLeft") prevImage();
+  if (e.key === "Escape") bootstrap.Modal.getInstance(modal).hide();
+  }
+  });
+
+  // Native Web Share API (modern browsers)
+  function shareImage() {
+  const imgSrc = images[currentImage];
+  if (navigator.share) {
+  navigator.share({
+  title: 'Check this image',
+  url: imgSrc
+  }).catch((err) => console.log("Sharing failed:", err));
+  } else {
+  alert("Sharing is not supported on this browser.");
+  }
   }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
- <!-- /successful projets -->
+<!-- /successful projets -->
 
 <!-- Services Section -->
 <section id="services" class="services section bg-light">
@@ -669,7 +678,7 @@
     <p>Tailored IT Solutions to Empower Your Business</p>
   </div><!-- End Section Title -->
 
-  <div class="container">
+  <div class="container d-none d-md-block">
 
     <div class="row gy-4">
 
@@ -737,6 +746,94 @@
 
   </div><!-- End Container -->
 
+  <!-- small screen carosel -->
+  <!-- Services Carousel - Visible on small screens only -->
+<div class="d-md-none px-3">
+
+  <!-- Preview Titles -->
+  <div class="d-flex justify-content-between text-muted small mb-2 px-1">
+    <span id="prevTitle"></span>
+    <span id="nextTitle" class="text-end"></span>
+  </div>
+
+  <!-- Carousel -->
+  <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active" data-title="Web Development">
+        <div class="service-item item-cyan text-center shadow p-4 rounded">
+          <i class="bi bi-globe2 icon fs-1"></i>
+          <h3>Web Development</h3>
+          <p>We create websites that not only look great but also drive results. Our web development solutions help your business attract and retain customers with responsive, user-friendly designs.</p>
+          <a href="#web-services" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" data-title="Custom Software Solutions">
+        <div class="service-item item-orange text-center shadow p-4 rounded">
+          <i class="bi bi-code-slash icon fs-1"></i>
+          <h3>Custom Software Solutions</h3>
+          <p>Our software development services are designed to create customized applications that meet your unique business needs. We deliver scalable and secure solutions that help you stay ahead in the market.</p>
+          <a href="#software-solutions" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" data-title="Managed IT Services">
+        <div class="service-item item-teal text-center shadow p-4 rounded">
+          <i class="bi bi-shield-lock icon fs-1"></i>
+          <h3>Managed IT Services</h3>
+          <p>Let us handle your IT infrastructure so you can focus on your core business. Our managed IT services ensure your systems are secure, up-to-date, and running smoothly, without the hassle.</p>
+          <a href="#managed-it-services" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="carousel-item" data-title="Network Solutions">
+        <div class="service-item item-red text-center shadow p-4 rounded">
+          <i class="bi bi-wifi icon fs-1"></i>
+          <h3>Network Solutions</h3>
+          <p>We offer comprehensive network solutions to optimize your connectivity. Whether it's setting up new systems or troubleshooting existing issues, we ensure your network supports your business growth.</p>
+          <a href="#network-solutions" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="carousel-item" data-title="IT Consultancy">
+        <div class="service-item item-indigo text-center shadow p-4 rounded">
+          <i class="bi bi-briefcase icon fs-1"></i>
+          <h3>IT Consultancy</h3>
+          <p>Our expert consultants help businesses assess and align their IT strategy with their goals. We provide insights and recommendations to optimize your technology investments and processes.</p>
+          <a href="#it-consultancy" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="carousel-item" data-title="Graphic Design Solutions">
+        <div class="service-item item-pink text-center shadow p-4 rounded">
+          <i class="bi bi-brush icon fs-1"></i>
+          <h3>Graphic Design Solutions</h3>
+          <p>Our graphic design team helps you create a visual identity that resonates with your audience. From branding to marketing materials, we make sure your business stands out in a crowded marketplace.</p>
+          <a href="#graphic-design-solutions" class="read-more stretched-link"><span>Learn More</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <button class="carousel-control-prev custom-carousel-btn" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+      <i class="bi bi-chevron-left fs-3"></i>
+    </button>
+    <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+      <i class="bi bi-chevron-right fs-3"></i>
+    </button>
+  </div>
+</div>
+
+  <!-- end small screen carosel -->
+
 </section><!-- /Services Section -->
 
 
@@ -749,7 +846,7 @@
     <p>Flexible pricing plans designed to match your IT needs</p>
   </div><!-- End Section Title -->
 
-  <div class="container">
+  <div class="container d-none d-lg-block">
     <div class="row gy-4">
 
       <!-- Web Design Plan -->
@@ -841,6 +938,96 @@
 
     </div><!-- End pricing row -->
   </div>
+
+
+  <!-- Mobile Pricing Carousel (Visible only on small screens) -->
+   <!-- Mobile Pricing Carousel -->
+
+  <div class="swiper pricingSwiper d-lg-none">
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide">
+        <div class="service-item item-cyan position-relative text-center p-4">
+          <i class="bi bi-box icon text-success"></i>
+          <h3>Web Design</h3>
+          <p><strong>Ksh 3,500 - 30,000</strong></p>
+          <ul class="text-start small">
+            <li>E-commerce: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
+            <li>SME: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
+            <li>Academic: 3-5 Pages (Static) / 5-7 Pages (Dynamic)</li>
+            <li>Customized: 5-7 Pages (Static) / 8-13 Pages (Dynamic)</li>
+          </ul>
+          <p class="small mt-2">All web solutions are done professionally.<br>Rates may vary.<br>Your Vision | Our Solution</p>
+          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide">
+        <div class="service-item item-orange position-relative text-center p-4">
+          <i class="bi bi-send icon text-info"></i>
+          <h3>Custom Software</h3>
+          <p><strong>Contact Us</strong></p>
+          <ul class="text-start small">
+            <li>Tailored Software Solutions</li>
+            <li>Automation & Process Optimization</li>
+            <li>Database Integration</li>
+            <li>Scalable Features</li>
+            <li>Ongoing Maintenance</li>
+          </ul>
+          <p class="small mt-2">Rates depend on your requirements.<br>Your Vision | Our Solution</p>
+          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide">
+        <div class="service-item item-teal position-relative text-center p-4">
+          <i class="bi bi-airplane icon text-warning"></i>
+          <h3>Managed IT Services</h3>
+          <p><strong>$799 / mo</strong></p>
+          <ul class="text-start small">
+            <li>24/7 IT Support</li>
+            <li>Server and Network Management</li>
+            <li>Cloud Solutions & Data Backup</li>
+            <li>Disaster Recovery</li>
+            <li>Software & Hardware Management</li>
+          </ul>
+          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="swiper-slide">
+        <div class="service-item item-indigo position-relative text-center p-4">
+          <i class="bi bi-rocket icon text-primary"></i>
+          <h3>Enterprise IT</h3>
+          <p><strong>$1499 / mo</strong></p>
+          <ul class="text-start small">
+            <li>Full Network Infrastructure</li>
+            <li>Enterprise Security</li>
+            <li>Cloud Migration</li>
+            <li>Dedicated Consultant</li>
+            <li>Custom Software & Hardware</li>
+          </ul>
+          <a href="#contact" class="read-more stretched-link"><span>Contact Us</span> <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="swiper-button-prev text-dark"></div>
+    <div class="swiper-button-next text-dark"></div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- end small screen pricing carousel -->
+
 </section><!-- /Pricing Section -->
 
 

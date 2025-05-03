@@ -207,4 +207,69 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+
+  // <!-- JavaScript for Active bottom nav Link -->
+  let bottomnavmenulinks = document.querySelectorAll('.bottom-nav a');
+
+  function bottomnavmenuScrollspy() {
+    bottomnavmenulinks.forEach(navmenulink => {
+      if (!navmenulink.hash) return;
+      let section = document.querySelector(navmenulink.hash);
+      if (!section) return;
+      let position = window.scrollY + 200;
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        navmenulink.classList.add('active');
+      } else {
+        navmenulink.classList.remove('active');
+      }
+    })
+  }
+  window.addEventListener('load', bottomnavmenuScrollspy);
+  document.addEventListener('scroll', bottomnavmenuScrollspy);
+  
+
+  // small screen services carousel
+  const carouselEl = document.getElementById('servicesCarousel');
+  const prevTitleEl = document.getElementById('prevTitle');
+  const nextTitleEl = document.getElementById('nextTitle');
+
+  function updateTitlePreview() {
+    const items = carouselEl.querySelectorAll('.carousel-item');
+    const activeIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
+    const prevIndex = (activeIndex - 1 + items.length) % items.length;
+    const nextIndex = (activeIndex + 1) % items.length;
+
+    prevTitleEl.textContent = `⬅ ${items[prevIndex].dataset.title || ''}`;
+    nextTitleEl.textContent = `${items[nextIndex].dataset.title || ''} ➡`;
+  }
+
+  // Init
+  updateTitlePreview();
+  carouselEl.addEventListener('slid.bs.carousel', updateTitlePreview);
+
+  // pricing carousel
+  
+  new Swiper('.pricingSwiper', {
+    slidesPerView: 1.2,
+    spaceBetween: 20,
+    centeredSlides: true,
+    loop: true,
+    autoplay: {
+      delay: 8000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    breakpoints: {
+      576: {
+        slidesPerView: 1.5
+      }
+    }
+  });
+
+
+
 })();

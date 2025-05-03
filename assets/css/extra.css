@@ -274,6 +274,44 @@
 #end successful projects
 --------------------------------------------------------------*/
 
+
+/*--------------------------------------------------------------
+#services carosel
+--------------------------------------------------------------*/
+.service-item {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.custom-carousel-btn {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  top: 45%;
+  transform: translateY(-50%);
+}
+
+.custom-carousel-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.carousel-control-prev {
+  left: -10px;
+}
+.carousel-control-next {
+  right: -10px;
+}
+
+/*--------------------------------------------------------------
+#end services carosel
+--------------------------------------------------------------*/
+
   
   /*--------------------------------------------------------------
     #Footer
