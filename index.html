@@ -32,9 +32,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
-  <!-- pricing -->
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <!-- pricing Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
 
 </head>
 
@@ -940,88 +940,113 @@
   </div>
 
 
-  <!-- Mobile Pricing Carousel (Visible only on small screens) -->
-   <!-- Mobile Pricing Carousel -->
-
-  <div class="swiper pricingSwiper d-lg-none">
+<!-- Mobile Carousel Pricing Layout -->
+<!-- Mobile Carousel Layout -->
+<div class="container d-block d-lg-none mt-4">
+  <div class="swiper pricing-swiper">
     <div class="swiper-wrapper">
 
-      <!-- Slide 1 -->
+      <!-- Web Design -->
       <div class="swiper-slide">
-        <div class="service-item item-cyan position-relative text-center p-4">
-          <i class="bi bi-box icon text-success"></i>
-          <h3>Web Design</h3>
-          <p><strong>Ksh 3,500 - 30,000</strong></p>
-          <ul class="text-start small">
+        <div class="pricing-tem">
+          <h3 style="color: #20c997;">Web Design</h3>
+          <div class="price"><sup>ksh</sup>3,500<span> - 30,000</span></div>
+          <div class="icon">
+            <i class="bi bi-box" style="color: #20c997;"></i>
+          </div>
+          <ul>
             <li>E-commerce: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
             <li>SME: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
             <li>Academic: 3-5 Pages (Static) / 5-7 Pages (Dynamic)</li>
             <li>Customized: 5-7 Pages (Static) / 8-13 Pages (Dynamic)</li>
           </ul>
-          <p class="small mt-2">All web solutions are done professionally.<br>Rates may vary.<br>Your Vision | Our Solution</p>
-          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+          <p style="font-size: 0.8em; margin-top: 10px;">
+            All web solutions are done professionally.<br>
+            Rates are subjected to change based on requirements.<br>
+            Your Vision | Our Solution
+          </p>
+          <a href="#contact" class="btn-buy">Get Started</a>
         </div>
       </div>
 
-      <!-- Slide 2 -->
+      <!-- Custom Software Development -->
       <div class="swiper-slide">
-        <div class="service-item item-orange position-relative text-center p-4">
-          <i class="bi bi-send icon text-info"></i>
-          <h3>Custom Software</h3>
-          <p><strong>Contact Us</strong></p>
-          <ul class="text-start small">
+        <div class="pricing-tem">
+          <span class="featured">Featured</span>
+          <h3 style="color: #0dcaf0;">Custom Software Development</h3>
+          <div class="price"><sup>Contact</sup>Us</div>
+          <div class="icon">
+            <i class="bi bi-send" style="color: #0dcaf0;"></i>
+          </div>
+          <ul>
             <li>Tailored Software Solutions</li>
-            <li>Automation & Process Optimization</li>
+            <li>Automation &amp; Process Optimization</li>
             <li>Database Integration</li>
-            <li>Scalable Features</li>
-            <li>Ongoing Maintenance</li>
+            <li>Custom Features &amp; Scalability</li>
+            <li>Ongoing Support &amp; Maintenance</li>
           </ul>
-          <p class="small mt-2">Rates depend on your requirements.<br>Your Vision | Our Solution</p>
-          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+          <p style="font-size: 0.8em; margin-top: 10px;">
+            Rates are subject to change based on project requirements.<br>
+            Your Vision | Our Solution
+          </p>
+          <a href="#contact" class="btn-buy">Get Started</a>
         </div>
       </div>
 
-      <!-- Slide 3 -->
+      <!-- Managed IT Services -->
       <div class="swiper-slide">
-        <div class="service-item item-teal position-relative text-center p-4">
-          <i class="bi bi-airplane icon text-warning"></i>
-          <h3>Managed IT Services</h3>
-          <p><strong>$799 / mo</strong></p>
-          <ul class="text-start small">
+        <div class="pricing-tem">
+          <h3 style="color: #fd7e14;">Managed IT Services</h3>
+          <div class="price"><sup>$</sup>799<span> / mo</span></div>
+          <div class="icon">
+            <i class="bi bi-airplane" style="color: #fd7e14;"></i>
+          </div>
+          <ul>
             <li>24/7 IT Support</li>
             <li>Server and Network Management</li>
-            <li>Cloud Solutions & Data Backup</li>
-            <li>Disaster Recovery</li>
-            <li>Software & Hardware Management</li>
+            <li>Cloud Solutions &amp; Data Backup</li>
+            <li>Security &amp; Disaster Recovery</li>
+            <li>Software &amp; Hardware Management</li>
           </ul>
-          <a href="#contact" class="read-more stretched-link"><span>Get Started</span> <i class="bi bi-arrow-right"></i></a>
+          <a href="#contact" class="btn-buy">Get Started</a>
         </div>
       </div>
 
-      <!-- Slide 4 -->
+      <!-- Enterprise IT Solutions -->
       <div class="swiper-slide">
-        <div class="service-item item-indigo position-relative text-center p-4">
-          <i class="bi bi-rocket icon text-primary"></i>
-          <h3>Enterprise IT</h3>
-          <p><strong>$1499 / mo</strong></p>
-          <ul class="text-start small">
-            <li>Full Network Infrastructure</li>
-            <li>Enterprise Security</li>
-            <li>Cloud Migration</li>
-            <li>Dedicated Consultant</li>
-            <li>Custom Software & Hardware</li>
+        <div class="pricing-tem">
+          <h3 style="color: #0d6efd;">Enterprise IT Solutions</h3>
+          <div class="price"><sup>$</sup>1499<span> / mo</span></div>
+          <div class="icon">
+            <i class="bi bi-rocket" style="color: #0d6efd;"></i>
+          </div>
+          <ul>
+            <li>Complete Network Infrastructure</li>
+            <li>Advanced Software Integration</li>
+            <li>Enterprise Security Solutions</li>
+            <li>Cloud Migration &amp; Support</li>
+            <li>Dedicated IT Consultant</li>
+            <li>Custom Software &amp; Hardware Solutions</li>
           </ul>
-          <a href="#contact" class="read-more stretched-link"><span>Contact Us</span> <i class="bi bi-arrow-right"></i></a>
+          <a href="#contact" class="btn-buy">Contact Us</a>
         </div>
       </div>
 
     </div>
 
-    <!-- Navigation Buttons -->
-    <div class="swiper-button-prev text-dark"></div>
-    <div class="swiper-button-next text-dark"></div>
+    <!-- Pagination & Navigation -->
+    <div class="swiper-pagination mt-3"></div>
+
+    <!-- Navigation -->
+    <button class="carousel-control-prev custom-carousel-btn pricing-button-prev" type="button" data-bs-target=".pricing-swiper" data-bs-slide="prev">
+      <i class="bi bi-chevron-left fs-3"></i>
+    </button>
+    <button class="carousel-control-next custom-carousel-btn pricing-button-next" type="button" data-bs-target=".pricing-swiper" data-bs-slide="next">
+      <i class="bi bi-chevron-right fs-3"></i>
+    </button>
   </div>
-</section>
+</div>
+
 
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -1288,12 +1313,15 @@
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
             <p>
-              "Sharaz Technologies transformed our online presence with a fantastic website. They helped streamline our operations with custom software, and their support has been exceptional. I highly recommend them to anyone in Kenya looking to enhance their business through technology."
+              " We wanted a clean, modern website for our business, and Sharaz Technologies delivered 
+                perfectly! They listened to our ideas, gave us great suggestions, and the final design was
+                even better than we expected. Now our clients find it easy to use, and the site loads 
+                fast on all devices. I highly recommend them for web design"
             </p>
             <div class="profile mt-auto">
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>James K. Mwangi</h3>
-              <h4>CEO, Tech Innovations Kenya</h4>
+              <img src="assets/img/testimonials/nami-logo.png" class="testimonial-img" alt="">
+              <h3>Nami Petgroomers</h3>
+              <h4>Pet-grooming Company, Kenya</h4>
             </div>
           </div>
         </div><!-- End testimonial item -->
@@ -1304,28 +1332,12 @@
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
             <p>
-              "We’ve been working with Sharaz Technologies for over a year now, and they’ve always provided reliable IT support. Their managed IT services have improved our system’s performance and security. We’ve seen great results from their tailored solutions."
+              "I hired them for a logo and company profile, and wow! They gave my business a whole new professional look. The branding package included everything business cards, flyers, and social media covers. Nilifurahia sana kazi yao, na bei ilikuwa fair. I’ll definitely use them again."
             </p>
             <div class="profile mt-auto">
-              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <h3>Mary W. Okello</h3>
-              <h4>Operations Manager, Nairobi Traders</h4>
-            </div>
-          </div>
-        </div><!-- End testimonial item -->
-
-        <div class="swiper-slide">
-          <div class="testimonial-item">
-            <div class="stars">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-            </div>
-            <p>
-              "As a startup in the Kenyan tech space, we needed reliable software solutions and ongoing IT support. Sharaz Technologies provided us with a fully customized solution that helped us scale quickly. Their team’s professionalism and expertise have made them a trusted partner."
-            </p>
-            <div class="profile mt-auto">
-              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-              <h3>Kwame K. Ochieng</h3>
-              <h4>Founder, Ochieng Tech Solutions</h4>
+              <img src="assets/img/testimonials/Alice's closet - Logo.png" class="testimonial-img" alt="">
+              <h3>Alice's Closet</h3>
+              <h4>Fashion Designer Botique</h4>
             </div>
           </div>
         </div><!-- End testimonial item -->
@@ -1339,9 +1351,9 @@
               "Sharaz Technologies took our business to the next level with their web development and IT support. We are now able to reach a wider audience and operate more efficiently. The ongoing support they provide gives us peace of mind knowing we can rely on them."
             </p>
             <div class="profile mt-auto">
-              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-              <h3>Esther N. Kamau</h3>
-              <h4>Marketing Director, Kamau Enterprises</h4>
+              <img src="assets/img/testimonials/Beacon of foundation.png" class="testimonial-img" alt="">
+              <h3>Beacon of Compassion Foundation</h3>
+              <h4>Charity Foundation</h4>
             </div>
           </div>
         </div><!-- End testimonial item -->
@@ -1352,12 +1364,12 @@
               <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
             </div>
             <p>
-              "The team at Sharaz Technologies is amazing. Their IT consultancy services helped us streamline our operations and optimize our workflow. I would recommend their services to any Kenyan business looking for expert IT solutions."
+              "I needed a reliable way to communicate with my customers, and Sharaz Technologies' bulk SMS service was the perfect solution. It's efficient, affordable, and has greatly improved my customer engagement. Asanteni kwa huduma bora!  "
             </p>
             <div class="profile mt-auto">
-              <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-              <h3>Daniel M. Njoroge</h3>
-              <h4>IT Manager, Nairobi Logistics</h4>
+              <img src="assets/img/testimonials/caroline.jpg" class="testimonial-img" alt="">
+              <h3>Caroline Waiyego</h3>
+              <h4>Business Owner</h4>
             </div>
           </div>
         </div><!-- End testimonial item -->
@@ -1602,21 +1614,25 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="300">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+254 796 526 231</p>
-                  <!-- <p>+254 796 526 231</p> -->
-                </div>
+              <div class="col-md-6 contact-item">
+                <a href="tel:+254796526231;">
+                  <div class="info-item" data-aos="fade" data-aos-delay="300">
+                    <i class="bi bi-telephone" ></i>
+                    <h3>Call Us</h3>
+                    <p>+254 796 526 231</p>
+                    <!-- <p>+254 796 526 231</p> -->
+                  </div>
+                </a>
               </div><!-- End Info Item -->
 
-              <div class="col-md-6">
-                <div class="info-item" data-aos="fade" data-aos-delay="400">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>sharaztechs@gmail.com</p>
-                </div>
+              <div class="col-md-6 contact-item">
+                <a href="mailto:sharaztechs@gmail.com;">
+                  <div class="info-item" data-aos="fade" data-aos-delay="400">
+                    <i class="bi bi-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>sharaztechs@gmail.com</p>
+                  </div>
+                </a>
               </div><!-- End Info Item -->
 
               <div class="col-md-6">

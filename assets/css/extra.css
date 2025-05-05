@@ -312,6 +312,63 @@
 #end services carosel
 --------------------------------------------------------------*/
 
+/*--------------------------------------------------------------
+#Pricing small screen carousel
+--------------------------------------------------------------*/
+.pricing-tem {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+.featured {
+  background-color: #ffc107;
+  color: #000;
+  padding: 4px 8px;
+  font-size: 0.75em;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.btn-buy {
+  background-color: transparent;
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+
+.pricing-button-prev {
+  left: 0px;
+}
+.pricing-button-next {
+  right: -0px;
+}
+/*--------------------------------------------------------------
+    # End Pricing small screen carousel
+  --------------------------------------------------------------*/
+
+
   
   /*--------------------------------------------------------------
     #Footer
@@ -325,6 +382,12 @@
     font-size:14px!important;
   }
   .footer-contact a:hover {
+    color: var(--accent-color)!important;
+  }
+  .contact-item a {
+    color: color-mix(in srgb, var(--default-color), transparent 0%) !important;
+  }
+  .contact-item a:hover {
     color: var(--accent-color)!important;
   }
   /*--------------------------------------------------------------

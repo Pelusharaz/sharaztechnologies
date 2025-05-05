@@ -227,9 +227,35 @@
   }
   window.addEventListener('load', bottomnavmenuScrollspy);
   document.addEventListener('scroll', bottomnavmenuScrollspy);
+
+  // Hide the bottom nav on scroll to footer
+  document.addEventListener("DOMContentLoaded", function () {
+    const bottomNav = document.getElementById("bottomNav");
+    const footer = document.getElementById("footer");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            bottomNav.style.display = "none";
+          } else {
+            bottomNav.style.display = "flex"; // or "block", depending on your styling
+          }
+        });
+      },
+      {
+        root: null, // viewport
+        threshold: 0.1, // adjust if needed
+      }
+    );
+
+    if (footer) {
+      observer.observe(footer);
+    }
+  });
   
 
-  // small screen services carousel
+  // small screen services section carousel
   const carouselEl = document.getElementById('servicesCarousel');
   const prevTitleEl = document.getElementById('prevTitle');
   const nextTitleEl = document.getElementById('nextTitle');
@@ -248,27 +274,36 @@
   updateTitlePreview();
   carouselEl.addEventListener('slid.bs.carousel', updateTitlePreview);
 
-  // pricing carousel
-  
-  new Swiper('.pricingSwiper', {
-    slidesPerView: 1.2,
-    spaceBetween: 20,
-    centeredSlides: true,
-    loop: true,
-    autoplay: {
-      delay: 8000,
-      disableOnInteraction: false,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
-    },
-    breakpoints: {
-      576: {
-        slidesPerView: 1.5
+  // pricing section carousel
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".pricing-swiper", {
+      loop: true,
+      spaceBetween: 20,
+      slidesPerView: 1.1,
+      centeredSlides: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".pricing-button-next",
+        prevEl: ".pricing-button-prev",
+      },
+      breakpoints: {
+        500: {
+          slidesPerView: 1.2,
+        },
+        768: {
+          slidesPerView: 1.5,
+        }
       }
-    }
+    });
   });
+
 
 
 
