@@ -304,6 +304,25 @@
     });
   });
 
+  // sharaz mart JS for Auto-Scroll on small screen carousel
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.querySelector('.featured-carousel');
+    if (!carousel) return;
+
+    let scrollAmount = 0;
+    setInterval(() => {
+      scrollAmount += 180;
+      if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
+        scrollAmount = 0;
+      }
+      carousel.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }, 3000); // Every 3 seconds
+  });
+
+
 
 
 

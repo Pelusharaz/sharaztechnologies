@@ -18,7 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet preload">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
@@ -39,11 +39,14 @@
 </head>
 
 <body class="index-page">
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
       <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <img src="assets/img/logo/sharaz-logo-removebg.png" alt="" class="sharaz-logo img-fluid" style="max-width: 800px; height: auto;">
+        <img rel="preload" src="assets/img/logo/sharaz-logo-removebg.png" alt="" class="sharaz-logo img-fluid" style="max-width: 800px; height: auto;" as="image">
         <h1 class="sitename">Sharaz Technologies</h1>
       </a>
     
@@ -1163,43 +1166,72 @@
         <div class="row">
           <!-- Category 1 -->
           <div class="col-12 mb-4">
-            <div class="category-card p-4 text-center bg-white rounded shadow-sm">
-              <i class="bi bi-phone-laptop" style="font-size: 36px; color: #20c997;"></i>
-              <h5 class="mt-3">Electronics</h5>
-              <p>Browse the latest electronics and gadgets to fit your lifestyle.</p>
-              <a href="mart.html" class="btn btn-outline-primary mt-3">Shop Now</a>
+            <div class="category-card p-4 text-center rounded shadow-sm" style="
+                  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('assets/img/clients/client-1.png') center/cover no-repeat;
+                  border: 1px solid #ddd;">
+              
+              <i class="bi bi-lightning-charge" style="font-size: 36px; color: blue;"></i>
+              <h5 class="mt-3 text-light">Electronics</h5>
+              <p class="text-light">Explore our collection of stylish apparel and accessories.</p>
+                <a href="mart.html" class="btn btn-primary mt-3 px-4 py-2">Shop Now</a>
             </div>
-          </div><!-- End Category 1 -->
+          </div>
+          <!-- End Category 1 -->
 
           <!-- Category 2 -->
           <div class="col-12 mb-4">
-            <div class="category-card p-4 text-center bg-white rounded shadow-sm">
+            <div class="category-card p-4 text-center rounded shadow-sm" style="
+                  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('assets/img/clients/client-1.png') center/cover no-repeat;
+                  border: 1px solid #ddd;">
+              
               <i class="bi bi-bag-heart" style="font-size: 36px; color: #fd7e14;"></i>
-              <h5 class="mt-3">Fashion</h5>
-              <p>Explore our collection of stylish apparel and accessories.</p>
-              <a href="mart.html" class="btn btn-outline-primary mt-3">Shop Now</a>
+              <h5 class="mt-3 text-light">Fashion</h5>
+              <p class="text-light">Explore our collection of stylish apparel and accessories.</p>
+                <a href="mart.html" class="btn btn-primary mt-3 px-4 py-2">Shop Now</a>
             </div>
           </div><!-- End Category 2 -->
 
           <!-- Category 3 -->
           <div class="col-12 mb-4">
+            <div class="category-card p-4 text-center rounded shadow-sm" style="
+                  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('assets/img/clients/client-1.png') center/cover no-repeat;
+                  border: 1px solid #ddd;">
+              
+              <i class="bi bi-bag-heart" style="font-size: 36px; color: #fd7e14;"></i>
+              <h5 class="mt-3 text-light">Home & Furniture</h5>
+              <p class="text-light">Find furniture and decor that transform your living space.</p>
+                <a href="mart.html" class="btn btn-primary mt-3 px-4 py-2">Shop Now</a>
+            </div>
+          </div>
+          <!-- End Category 3 -->
+
+          <!-- Category 4 -->
+          <div class="col-12 mb-4">
+            <div class="category-card p-4 text-center rounded shadow-sm" style="
+                  background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                  url('assets/img/clients/client-1.png') center/cover no-repeat;
+                  border: 1px solid #ddd;">
+              
+              <i class="bi bi-bag-heart" style="font-size: 36px; color: #fd7e14;"></i>
+              <h5 class="mt-3 text-light">Laptops,Phones & Accessories</h5>
+              <p class="text-light">Explore our collection of stylish apparel and accessories.</p>
+                <a href="mart.html" class="btn btn-primary mt-3 px-4 py-2">Shop Now</a>
+            </div>
+          </div>
+          <!-- End Category 4 -->
+
+          <!-- initial category card -->
+          <!-- <div class="col-12 mb-4">
             <div class="category-card p-4 text-center bg-white rounded shadow-sm">
               <i class="bi bi-house-door" style="font-size: 36px; color: #007bff;"></i>
               <h5 class="mt-3">Home & Furniture</h5>
               <p>Find furniture and decor that transform your living space.</p>
               <a href="mart.html" class="btn btn-outline-primary mt-3">Shop Now</a>
             </div>
-          </div><!-- End Category 3 -->
-
-          <!-- Category 4 -->
-          <div class="col-12 mb-4">
-            <div class="category-card p-4 text-center bg-white rounded shadow-sm">
-              <i class="bi bi-book" style="font-size: 36px; color: #fd7e14;"></i>
-              <h5 class="mt-3">Books</h5>
-              <p>Dive into a world of knowledge with our variety of books.</p>
-              <a href="mart.html" class="btn btn-outline-primary mt-3">Shop Now</a>
-            </div>
-          </div><!-- End Category 4 -->
+          </div> -->
         </div>
       </div><!-- End Left Column -->
 
@@ -1207,7 +1239,7 @@
       <div class="col-md-8" data-aos="fade-up" data-aos-delay="200">
         <h4>Featured Products</h4>
         
-        <div class="row gy-4">
+        <div class="row gy-4 d-none d-lg-flex">
 
           <!-- Product 1 -->
           <div class="col-lg-4 col-md-6 product-item">
@@ -1249,10 +1281,105 @@
             </div>
           </div><!-- End Product 4 -->
 
+          <!-- Product 5 -->
+          <div class="col-lg-4 col-md-6 product-item">
+            <div class="product-card">
+              <img src="https://m.media-amazon.com/images/I/61XuL3UjKPL._AC_SL1500_.jpg" class="img-fluid" alt="Dining Set">
+              <h5>Dining Set</h5>
+              <p>$499.99</p>
+              <a href="mart.html" class="btn btn-primary">View Details</a>
+            </div>
+          </div><!-- End Product 5 -->
+
+          <!-- Product 6 -->
+          <div class="col-lg-4 col-md-6 product-item">
+            <div class="product-card">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVY7sqcHONGOJYrDnpdRTWOFhd8l9EKybIhA&s" class="img-fluid" alt="Books on Coding">
+              <h5>Best Coding Practices</h5>
+              <p>$29.99</p>
+              <a href="mart.html" class="btn btn-primary">View Details</a>
+            </div>
+          </div><!-- End Product 6 -->
+
         </div><!-- End Featured Products Row -->
 
+        <!-- Featured products carousel for small devices -->
+        <div class="featured-carousel d-flex overflow-auto gap-3 pb-3 d-lg-none">
+          <!-- product 1 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://saruk-web-images.s3.eu-north-1.amazonaws.com/smartphone-accessories-new-banner.jpg" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">First</h6>
+            <p class="small">$299.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 1 -->
+
+          <!-- product 2 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpUoDuNrEDcpxP4M15TO3xT6sl-mjJPmcaQ&s" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Leather Jacket</h6>
+            <p class="small">$144.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 2 -->
+
+          <!-- product 3 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://m.media-amazon.com/images/I/61XuL3UjKPL._AC_SL1500_.jpg" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Dining Set</h6>
+            <p class="small">$299.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 3 -->
+
+          <!-- product 4 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVY7sqcHONGOJYrDnpdRTWOFhd8l9EKybIhA&s" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Best coding practices</h6>
+            <p class="small">$299.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 4 -->
+
+          <!-- product 5 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://saruk-web-images.s3.eu-north-1.amazonaws.com/smartphone-accessories-new-banner.jpg" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Smartphone X</h6>
+            <p class="small">$299.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 5 -->
+
+          <!-- product 6 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpUoDuNrEDcpxP4M15TO3xT6sl-mjJPmcaQ&s" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Last</h6>
+            <p class="small">$144.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 6 -->
+
+          <!-- product 7 -->
+          <div class="product-card text-center flex-shrink-0" style="width: 150px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpUoDuNrEDcpxP4M15TO3xT6sl-mjJPmcaQ&s" class="img-fluid rounded" alt="Smartphone">
+            <h6 class="mt-2">Last 7</h6>
+            <p class="small">$144.99</p>
+            <a href="mart.html" class="btn btn-sm btn-primary">View</a>
+          </div>
+          <!-- End product 7 -->
+          
+
+        </div>
+
+        <!-- Call to Action for Full Mart small screen -->
+        <div class="text-center mt-4 d-md-none">
+          <h5>Want to see more products?</h5>
+          <a href="mart.html" class="btn btn-lg btn-warning">Visit Sharaz Mart</a>
+        </div>
+        
+
         <!-- Call to Action for Full Mart -->
-        <div class="text-center mt-4">
+        <div class="text-center mt-4 d-none d-lg-block">
           <h5>Want to see more products?</h5>
           <a href="mart.html" class="btn btn-lg btn-warning">Visit Sharaz Mart</a>
         </div>
@@ -1399,7 +1526,7 @@
       <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
         <div class="team-member">
           <div class="member-img">
-            <img src="assets/img/team/sharaz.jpg" class="img-fluid" alt="">
+            <img src="assets/img/team/sharaz.JPG" class="img-fluid" alt="">
             <div class="social">
               <a href=""><i class="bi bi-twitter-x"></i></a>
               <a href=""><i class="bi bi-facebook"></i></a>
@@ -1787,7 +1914,18 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/main.js" defer></script>
+
+  <!-- Pre load script -->
+  <script>
+    window.addEventListener("load", function () {
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.style.opacity = "0";
+        setTimeout(() => preloader.style.display = "none", 500);
+      }
+    });
+  </script>
 
 </body>
 
