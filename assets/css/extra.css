@@ -447,17 +447,68 @@
     }
   }
 
-
-  /* Category card background improvements */
+  
   .category-card {
+    position: relative;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .category-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-blend-mode: overlay;
-    background-color: rgba(255, 255, 255, 0.9); /* Maintain white card feel */
-    border-radius: 8px;
-    padding: 20px;
-    }
+    background-blend-mode: darken;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .category-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .category-card:hover::before {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .category-card > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .category-card h5 {
+    color: #fff; /* Ensures white heading text */
+  }
+
+  /* 🔁 Background-specific classes */
+  .bg-electronics::before {
+    background-image: url('../img/Electronics.webp');
+  }
+
+  .bg-furniture::before {
+    background-image: url('../img/Funiture.jpg');
+  }
+
+  .bg-fashion::before {
+    background-image: url('../img/Fashion.webp');
+  }
+
+  .bg-laptops::before {
+    background-image: url('../img/Laptops.webp');
+  }
+
+
 
  
 
