@@ -1,3 +1,18 @@
+<!-- Php to track user activities on page -->
+<?php
+// track_activity.php
+require 'Backend/includes/db.php';
+
+$page = $_SERVER['PHP_SELF'];
+$action = 'visit'; // or 'click', depending on the event
+
+$sql = "INSERT INTO user_activity (page, action) VALUES (?, ?)";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$page, $action]);
+?>
+<!-- end tracking -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +25,7 @@
 
   <!-- Favicons -->
   <link href="assets/img/logo/sharaz new logo-circle.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/logo/sharaz new logo-circle.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -45,7 +60,7 @@
 
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
-      <a href="index.html" class="logo d-flex align-items-center me-auto">
+      <a href="index.php" class="logo d-flex align-items-center me-auto">
         <img rel="preload" src="assets/img/logo/sharaz-logo-removebg.png" alt="" class="sharaz-logo img-fluid" style="max-width: 800px; height: auto;" as="image">
         <h1 class="sitename">Sharaz Technologies</h1>
       </a>
@@ -1760,7 +1775,7 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="Backend/pages/contacts.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1784,7 +1799,7 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" name="contact-message">Send Message</button>
                 </div>
 
               </div>
