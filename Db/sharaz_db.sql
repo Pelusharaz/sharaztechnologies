@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2025 at 04:22 PM
+-- Generation Time: May 10, 2025 at 12:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,20 +36,6 @@ CREATE TABLE `contact_messages` (
   `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `contact_messages`
---
-
-INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `submitted_at`) VALUES
-(1, NULL, NULL, NULL, NULL, '2025-05-09 13:00:39'),
-(2, NULL, NULL, NULL, NULL, '2025-05-09 13:03:15'),
-(3, 'JEREMIAH PELU', 'pelunguta@gmail.com', 'TEST', 'test', '2025-05-09 13:51:16'),
-(4, 'JEREMIAH PELU', 'pelunguta@gmail.com', 'TEST', 'test', '2025-05-09 13:56:32'),
-(5, 'JEREMIAH PELU', 'pelunguta@gmail.com', 'TEST', 'test', '2025-05-09 14:01:05'),
-(6, NULL, NULL, NULL, NULL, '2025-05-09 14:01:15'),
-(7, 'JEREMIAH PELU', 'pelunguta@gmail.com', 'TEST', 'test', '2025-05-09 14:19:25'),
-(8, 'JEREMIAH PELU', 'pelunguta@gmail.com', 'TEST', 'test', '2025-05-09 14:21:28');
-
 -- --------------------------------------------------------
 
 --
@@ -61,13 +47,6 @@ CREATE TABLE `newsletter` (
   `email` varchar(100) DEFAULT NULL,
   `subscribed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `newsletter`
---
-
-INSERT INTO `newsletter` (`id`, `email`, `subscribed_at`) VALUES
-(1, NULL, '2025-05-09 13:00:46');
 
 -- --------------------------------------------------------
 
@@ -149,7 +128,69 @@ INSERT INTO `user_activity` (`id`, `page`, `action`, `timestamp`) VALUES
 (12, '/sharaztechnologies/index.php', 'visit', '2025-05-09 17:03:04'),
 (13, '/sharaztechnologies/index.php', 'visit', '2025-05-09 17:05:57'),
 (14, '/sharaztechnologies/index.php', 'visit', '2025-05-09 17:19:00'),
-(15, '/sharaztechnologies/index.php', 'visit', '2025-05-09 17:21:11');
+(15, '/sharaztechnologies/index.php', 'visit', '2025-05-09 17:21:11'),
+(16, '/sharaztechnologies/index.php', 'visit', '2025-05-10 10:52:24'),
+(17, '/sharaztechnologies/index.php', 'visit', '2025-05-10 10:54:14'),
+(18, '/sharaztechnologies/index.php', 'visit', '2025-05-10 10:55:48'),
+(19, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:06:51'),
+(20, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:07:45'),
+(21, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:18:08'),
+(22, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:20:14'),
+(23, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:20:16'),
+(24, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:30:25'),
+(25, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:34:09'),
+(26, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:36:20'),
+(27, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:43:00'),
+(28, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:43:54'),
+(29, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:47:46'),
+(30, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:48:50'),
+(31, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:53:23'),
+(32, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:54:10'),
+(33, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:57:06'),
+(34, '/sharaztechnologies/index.php', 'visit', '2025-05-10 11:57:53'),
+(35, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:01:57'),
+(36, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:03:07'),
+(37, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:09:38'),
+(38, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:10:21'),
+(39, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:16:33'),
+(40, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:19:07'),
+(41, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:21:00'),
+(42, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:28:42'),
+(43, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:32:03'),
+(44, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:32:56'),
+(45, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:33:19'),
+(46, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:34:14'),
+(47, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:35:03'),
+(48, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:36:26'),
+(49, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:38:30'),
+(50, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:38:45'),
+(51, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:38:45'),
+(52, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:39:52'),
+(53, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:39:59'),
+(54, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:39:59'),
+(55, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:42:42'),
+(56, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:45:06'),
+(57, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:46:12'),
+(58, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:46:25'),
+(59, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:48:14'),
+(60, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:48:29'),
+(61, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:49:21'),
+(62, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:49:24'),
+(63, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:52:24'),
+(64, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:56:15'),
+(65, '/sharaztechnologies/index.php', 'visit', '2025-05-10 12:59:03'),
+(66, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:00:26'),
+(67, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:04:49'),
+(68, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:05:00'),
+(69, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:06:58'),
+(70, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:07:07'),
+(71, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:07:20'),
+(72, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:08:07'),
+(73, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:09:32'),
+(74, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:14:19'),
+(75, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:15:35'),
+(76, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:17:16'),
+(77, '/sharaztechnologies/index.php', 'visit', '2025-05-10 13:18:43');
 
 --
 -- Indexes for dumped tables
@@ -193,13 +234,13 @@ ALTER TABLE `user_activity`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pricing`
@@ -217,7 +258,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
