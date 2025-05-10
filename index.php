@@ -13,6 +13,7 @@ $stmt->execute([$page, $action]);
 <!-- end tracking -->
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1795,7 +1796,7 @@ $stmt->execute([$page, $action]);
                 </div>
 
                 <div class="col-12 text-center">
-                  <div class="loading">Loading</div>
+                  <div class="loading" >Loading</div>
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
@@ -1912,6 +1913,9 @@ $stmt->execute([$page, $action]);
 
   <!-- Main JS File -->
   <script src="assets/js/main.js" defer></script>
+
+  <!-- Backend Js -->
+   <script src="Backend/js/scripts.js" defer></script>
 
   <!-- Pre load script -->
   <script>
