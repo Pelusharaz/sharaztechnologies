@@ -1,7 +1,7 @@
 <!-- Php to track user activities on page -->
 <?php
 // track_activity.php
-require 'Backend/includes/db.php';
+require 'Backend/includes/config.php';
 
 $page = $_SERVER['PHP_SELF'];
 $action = 'visit'; // or 'click', depending on the event
@@ -12,8 +12,7 @@ $stmt->execute([$page, $action]);
 ?>
 <!-- end tracking -->
 
-
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1776,7 +1775,7 @@ $stmt->execute([$page, $action]);
           </div>
 
           <div class="col-lg-6">
-            <form action="Backend/pages/contacts.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form id="contact-form" action="Backend/pages/contacts.php" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1800,7 +1799,7 @@ $stmt->execute([$page, $action]);
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit" name="contact-message">Send Message</button>
+                  <button type="submit" name="submit">Send Message</button>
                 </div>
 
               </div>

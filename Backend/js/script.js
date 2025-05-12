@@ -10,38 +10,38 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
 // contact form submission
-document.querySelector('.php-email-form').addEventListener('submit', function (e) {
-  e.preventDefault();
+//   document.getElementById('contact-form').addEventListener('submit', function(e) {
+//   e.preventDefault();
 
-  const form = this;
-  const formData = new FormData(form);
-  const loading = form.querySelector('.loading');
-  const errorMessage = form.querySelector('.error-message');
-  const sentMessage = form.querySelector('.sent-message');
+//   const form = e.target;
+//   const formData = new FormData(form);
+//   const loading = form.querySelector('.loading');
+//   const error = form.querySelector('.error-message');
+//   const success = form.querySelector('.sent-message');
 
-  loading.style.display = 'block';
-  errorMessage.style.display = 'none';
-  sentMessage.style.display = 'none';
+//   loading.style.display = 'block';
+//   error.style.display = 'none';
+//   success.style.display = 'none';
 
-  fetch(form.getAttribute('action'), {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    loading.style.display = 'none';
-    if (data.status === 'success') {
-      sentMessage.innerText = data.message;
-      sentMessage.style.display = 'block';
-      form.reset();
-    } else {
-      errorMessage.innerText = data.message;
-      errorMessage.style.display = 'block';
-    }
-  })
-  .catch(() => {
-    loading.style.display = 'none';
-    errorMessage.innerText = "There was a problem submitting the form. Please try again.";
-    errorMessage.style.display = 'block';
-  });
-});
+//   fetch(form.action, {
+//     method: 'POST',
+//     body: formData
+//   })
+//   .then(res => res.text())
+//   .then(data => {
+//     loading.style.display = 'none';
+//     if (data.trim() === 'OK') {
+//       success.style.display = 'block';
+//       form.reset();
+//     } else {
+//       error.innerHTML = data;
+//       error.style.display = 'block';
+//     }
+//   })
+//   .catch(err => {
+//     loading.style.display = 'none';
+//     error.innerHTML = 'Form submission failed. Please try again.';
+//     error.style.display = 'block';
+//   });
+// });
+

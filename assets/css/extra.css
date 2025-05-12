@@ -521,6 +521,24 @@ a {
 
  
 
+/* backend css */
+
+  .loading, .error-message, .sent-message {
+    margin-top: 15px;
+    display: block;
+    font-weight: bold;
+  }
+
+  .sent-message {
+    color: green;
+  }
+
+  .error-message {
+    color: red;
+  }
+
+
+
   
   
 

@@ -2,7 +2,7 @@
 <h1>User Analytics</h1>
 
 <?php
-require '../includes/db.php';
+require '../includes/config.php';
 
 $sql = "SELECT page, action, COUNT(*) as count FROM user_activity GROUP BY page, action";
 $stmt = $pdo->query($sql);
