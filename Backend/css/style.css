@@ -43,3 +43,17 @@ a {
     margin-left: 0;
   }
 }
+
+
+/* contacts.php */
+.actions a {
+    margin-right: 10px;
+  }
+
+
+  .pagination .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+

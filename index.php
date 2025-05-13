@@ -1775,7 +1775,7 @@ $stmt->execute([$page, $action]);
           </div>
 
           <div class="col-lg-6">
-            <form id="contact-form" action="Backend/pages/contacts.php" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form id="contact-form" action="Backend/forms/contact-submit.php" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1804,6 +1804,7 @@ $stmt->execute([$page, $action]);
 
               </div>
             </form>
+
           </div><!-- End Contact Form -->
 
         </div>
@@ -1914,7 +1915,7 @@ $stmt->execute([$page, $action]);
   <script src="assets/js/main.js" defer></script>
 
   <!-- Backend Js -->
-   <script src="Backend/js/scripts.js" defer></script>
+   <script src="Backend/js/script.js" defer></script>
 
   <!-- Pre load script -->
   <script>

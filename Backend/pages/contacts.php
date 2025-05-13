@@ -1,188 +1,104 @@
+
+<!-- Get contact messages -->
+<?php
+require_once '../includes/config.php'; // PDO connection
+
+// Pagination setup
+$limit = 10; // Messages per page
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int) $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+// Fetch total messages count
+$totalStmt = $pdo->query("SELECT COUNT(*) FROM contact_messages");
+$totalMessages = $totalStmt->fetchColumn();
+$totalPages = ceil($totalMessages / $limit);
+
+// Fetch paginated messages
+$stmt = $pdo->prepare("SELECT * FROM contact_messages ORDER BY submitted_at DESC LIMIT :limit OFFSET :offset");
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <?php include '../includes/header.php'; ?>
 
-<h1>Contact Messages</h1>
-<p>Welcome to the admin dashboard.</p>
+<div class="container mt-5">
+  <h2>Contact Messages</h2>
+
+  <!-- Responsive wrapper -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover mt-4">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if ($messages): ?>
+          <?php foreach ($messages as $index => $msg): ?>
+            <tr>
+              <td><?= ($offset + $index + 1) ?></td>
+              <td><?= htmlspecialchars($msg['name']) ?></td>
+              <td><?= htmlspecialchars($msg['email']) ?></td>
+              <td><?= htmlspecialchars($msg['subject']) ?></td>
+              <td><?= nl2br(htmlspecialchars($msg['message'])) ?></td>
+              <td><?= date('d M Y, H:i', strtotime($msg['submitted_at'])) ?></td>
+              <td>
+                <a href="mailto:<?= $msg['email'] ?>?subject=RE: <?= urlencode($msg['subject']) ?>" class="btn btn-sm btn-primary">Reply</a>
+                <a href="../forms/delete.php?id=<?= $msg['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this message?');">Delete</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="7" class="text-center text-muted">No messages found.</td>
+          </tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination controls -->
+  <nav aria-label="Message pagination">
+    <ul class="pagination justify-content-center mt-3">
+      <?php if ($page > 1): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+        </li>
+      <?php else: ?>
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+      <?php endif; ?>
+
+      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+        </li>
+      <?php endfor; ?>
+
+      <?php if ($page < $totalPages): ?>
+        <li class="page-item">
+          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+        </li>
+      <?php else: ?>
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+      <?php endif; ?>
+    </ul>
+  </nav>
+</div>
 
 
-<?php
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     // Include the PDO connection
-//     require_once '../includes/config.php'; // Make sure this path is correct
-
-//     // Get and sanitize inputs
-//     $name = trim($_POST['name']);
-//     $email = trim($_POST['email']);
-//     $subject = trim($_POST['subject']);
-//     $message = trim($_POST['message']);
-
-//     try {
-//         // Insert into DB
-//         $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
-//         $stmt->execute([$name, $email, $subject, $message]);
-
-//         // Prepare email
-//         // $to = "sharaztechs@gmail.com"; // <-- Replace this with your actual Gmail
-//         // $email_subject = "New Contact Form Submission: $subject";
-//         // $email_body = "You have received a new message from the contact form:\n\n"
-//         //             . "Name: $name\n"
-//         //             . "Email: $email\n\n"
-//         //             . "Message:\n$message";
-//         // $headers = "From: noreply@yourdomain.com\r\n";
-//         // $headers .= "Reply-To: $email\r\n";
-
-//         // // Send the email
-//         // if (mail($to, $email_subject, $email_body, $headers)) {
-//         //     header("Location: ../../index.php?status=success");
-//         // } else {
-//         //     header("Location: ../../index.php?status=mail_error");
-//         // }
-//         // exit;
-
-//     } catch (Exception $e) {
-//         // On DB error
-//         header("Location: ../../index.php?status=db_error");
-//         exit;
-//     }
-// } else {
-//     // If accessed without POST
-//     header("Location: ../../index.php");
-//     exit;
-// }
-?>
-
-
-<?php
-// require_once '../includes/config.php'; // Adjust path to your PDO connection
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-//12     // Sanitize input
-//     $name    = trim($_POST['name']);
-//     $email   = trim($_POST['email']);
-//     $subject = trim($_POST['subject']);
-//     $message = trim($_POST['message']);
-
-//     // Basic validation (can expand)
-//     if (empty($name) || empty($email) || empty($subject) || empty($message)) {
-//         echo '<div class="error-message">Please fill in all fields.</div>';
-//         exit;
-//     }
-
-//     try {
-//         // Insert into DB
-//         $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
-//         $stmt->execute([$name, $email, $subject, $message]);
-
-//         // Optional: Send email (comment out if not needed)
-//         /*
-//         $to = "you@example.com"; // change to your email
-//         $headers = "From: $email" . "\r\n" .
-//                    "Reply-To: $email" . "\r\n" .
-//                    "X-Mailer: PHP/" . phpversion();
-//         mail($to, $subject, $message, $headers);
-//         */
-
-//         echo '<div class="sent-message">Your message has been sent. Thank you!</div>';
-//     } catch (PDOException $e) {
-//         echo '<div class="error-message">Error saving message. Please try again later.</div>';
-//         // You can log $e->getMessage() somewhere for debugging
-//     }
-// } else {
-//     echo '<div class="error-message">Invalid request.</div>';
-// }
-?>
-
-
-
-
-
-<!-- To add contact messages -->
-<?php
-// require '../includes/db.php';
-
-// $name = $_POST['name'];
-// $email = $_POST['email'];
-// $subject = $_POST['subject'];
-// $message = $_POST['message'];
-
-// $sql = "INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)";
-// $stmt = $pdo->prepare($sql);
-// $stmt->execute([$name, $email, $subject, $message]);
-
-// echo "<script>alert('message sent successfully')</script>
-// <script>window.location = '../../index.php'</script>";  
-
-// ?>
-<!-- end submission -->
-
-
-<!-- To add contact messages and send mail -->
-<?php
-// // Set response type
-// header('Content-Type: application/json');
-
-// // Database credentials
-// require_once '../includes/db.php'; // Adjust the path to where your db.php is located
-
-// // Email destination
-// $receiving_email_address = 'sharaztechs@gmail.com';
-
-// try {
-//   // Validate form submission
-//   if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-//     throw new Exception("Invalid request method.");
-//   }
-
-//   // Collect and sanitize form data
-//   $name    = htmlspecialchars(trim($_POST["name"]));
-//   $email   = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-//   $subject = htmlspecialchars(trim($_POST["subject"]));
-//   $message = htmlspecialchars(trim($_POST["message"]));
-
-//   // Validate required fields
-//   if (!$name || !$email || !$subject || !$message) {
-//     throw new Exception("All fields are required.");
-//   }
-
-//   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//     throw new Exception("Invalid email address.");
-//   }
-
-//   // Insert into database
-//   $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
-//   $stmt->execute([$name, $email, $subject, $message]);
-
-//   // Send email
-//   // $email_subject = "New Contact Message: $subject";
-//   // $email_body = "You have received a new message:\n\n" .
-//   //               "Name: $name\n" .
-//   //               "Email: $email\n\n" .
-//   //               "Subject: $subject\n\n" .
-//   //               "Message:\n$message\n";
-
-//   // $headers = "From: $name <$email>\r\nReply-To: $email";
-
-//   // if (!mail($receiving_email_address, $email_subject, $email_body, $headers)) {
-//   //   throw new Exception("Failed to send email.");
-//   // }
-
-//   // Success response 
-//     session_start();
-//     $_SESSION['contact_status'] = 'success';
-//     header('Location: ../../index.php'); // Redirect back to the section or page
-//     exit;
-
-
-// } catch (Exception $e) {
-//   // Error response
-//     session_start();
-//     $_SESSION['contact_status'] = 'error';
-//     $_SESSION['contact_message'] = $e->getMessage();
-//     header('Location: ../../index.php');
-//     exit;
-
-// }
-?>
-
+<!-- end Getting contact messages -->
 
 
 <?php include '../includes/footer.php'; ?>

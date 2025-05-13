@@ -527,6 +527,9 @@ a {
     margin-top: 15px;
     display: block;
     font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: none;
   }
 
   .sent-message {
@@ -536,6 +539,12 @@ a {
   .error-message {
     color: red;
   }
+
+  .show {
+    display: block !important;
+    opacity: 1;
+  }
+
 
 
 
