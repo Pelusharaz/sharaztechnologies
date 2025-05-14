@@ -545,6 +545,17 @@ a {
     opacity: 1;
   }
 
+  .loading {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  }
+  .loading.show {
+  display: block;
+  opacity: 1;
+}
+
+
 
 
 

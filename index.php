@@ -1,15 +1,5 @@
 <!-- Php to track user activities on page -->
-<?php
-// track_activity.php
-require 'Backend/includes/config.php';
-
-$page = $_SERVER['PHP_SELF'];
-$action = 'visit'; // or 'click', depending on the event
-
-$sql = "INSERT INTO user_activity (page, action) VALUES (?, ?)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$page, $action]);
-?>
+<?php include 'Backend/forms/trackactivity.php'; ?>
 <!-- end tracking -->
 
  
@@ -1823,8 +1813,8 @@ $stmt->execute([$page, $action]);
           <div class="col-lg-6">
             <h4>Join Our Newsletter</h4>
             <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
-            <form action="forms/newsletter.php" method="post" class="php-email-form">
-              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <form id="newsletters" action="Backend/forms/newsletter-submit.php" method="POST" class="php-email-form" onsubmit="trackAction('form_submit')">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe" onclick="trackAction('button_clicked')"></div>
               <div class="loading">Loading</div>
               <div class="error-message"></div>
               <div class="sent-message">Your subscription request has been sent. Thank you!</div>

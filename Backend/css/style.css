@@ -14,7 +14,7 @@ a {
 .sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: linear-gradient(to bottom right, #343a40, #23272b);
+  background: linear-gradient(to bottom right, #000000, #000000);
   transition: all 0.3s;
 }
 
@@ -43,10 +43,22 @@ a {
     margin-left: 0;
   }
 }
+/* Menu toggle */
+#menu-toggle {
+  background: none;
+  box-shadow: none;
+}
+
+@media (min-width: 992px) {
+  .navbar-brand span {
+    font-size: 1.25rem;
+  }
+}
+
 
 
 /* contacts.php */
-.actions a {
+  .actions a {
     margin-right: 10px;
   }
 
@@ -55,5 +67,8 @@ a {
   background-color: #0d6efd;
   border-color: #0d6efd;
   color: #fff;
-}
+  }
+
+  /* analytics.php */
+  canvas { max-width: 100%; height: auto; }
 

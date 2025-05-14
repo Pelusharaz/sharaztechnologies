@@ -52,7 +52,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <td><?= date('d M Y, H:i', strtotime($msg['submitted_at'])) ?></td>
               <td>
                 <a href="mailto:<?= $msg['email'] ?>?subject=RE: <?= urlencode($msg['subject']) ?>" class="btn btn-sm btn-primary">Reply</a>
-                <a href="../forms/delete.php?id=<?= $msg['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this message?');">Delete</a>
+                <a href="../forms/delete.php?id=<?= $msg['id'] ?>&type=contact" class="btn btn-sm btn-danger" onclick="return confirm('Delete this message?');">Delete</a>
               </td>
             </tr>
           <?php endforeach; ?>
