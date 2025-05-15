@@ -304,6 +304,23 @@
     });
   });
 
+  // new pricing carousel
+  const pricingSwiper = new Swiper('.pricing-swiper', {
+    loop: true,
+    spaceBetween: 20,
+    slidesPerView: 1,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.pricing-button-next',
+      prevEl: '.pricing-button-prev'
+    }
+  });
+
+
+
   // sharaz mart JS for Auto-Scroll on small screen carousel
   document.addEventListener("DOMContentLoaded", function () {
     const carousel = document.querySelector('.featured-carousel');

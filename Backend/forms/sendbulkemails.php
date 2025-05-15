@@ -1,6 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '../composure/vendor/autoload.php';
+require_once '../includes/config.php'; // Your DB config
+
 header('Content-Type: application/json');
-require_once '../includes/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = trim($_POST['subject']);
@@ -11,20 +16,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Fetch all subscribers
+    // Fetch subscriber emails
     $stmt = $pdo->query("SELECT email FROM newsletter_subscribers");
     $emails = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    // Send emails (using mail() for example, in real life use PHPMailer/SMTP)
+    $mail = new PHPMailer(true);
     $successCount = 0;
-    foreach ($emails as $email) {
-        $headers = "From: sharaztechs@gmail.com\r\nContent-Type: text/plain; charset=UTF-8";
-        if (mail($email, $subject, $message, $headers)) {
-            $successCount++;
-        }
-    }
 
-    echo json_encode(['status' => 'success', 'message' => "Bulk email sent to $successCount subscribers."]);
+    try {
+        // SMTP settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'sharaztechs@gmail.com'; // <-- your Gmail
+        $mail->Password = 'lsos qdht vhmr tzhd';   // <-- app password
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->setFrom('sharaztechs@gmail.com', 'Sharaz Technologies');
+
+        foreach ($emails as $email) {
+            $mail->clearAddresses();
+            $mail->addAddress($email);
+            $mail->Subject = $subject;
+            $mail->Body = $message;
+
+            if ($mail->send()) {
+                $successCount++;
+            }
+        }
+
+        echo json_encode(['status' => 'success', 'message' => "Bulk email sent to $successCount subscribers."]);
+    } catch (Exception $e) {
+        echo json_encode(['status' => 'error', 'message' => 'Mailer Error: ' . $mail->ErrorInfo]);
+    }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
 }
+
+?>

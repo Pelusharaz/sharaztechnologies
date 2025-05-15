@@ -855,96 +855,46 @@
   </div><!-- End Section Title -->
 
   <div class="container d-none d-lg-block">
-    <div class="row gy-4">
+    <?php require_once 'Backend/includes/config.php';
 
-      <!-- Web Design Plan -->
-      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-        <div class="pricing-tem">
-          <h3 style="color: #20c997;">Web Design</h3>
-          <div class="price"><sup>ksh</sup>3,500<span> - 30,000</span></div>
-          <div class="icon">
-            <i class="bi bi-box" style="color: #20c997;"></i>
+    $stmt = $pdo->query("SELECT * FROM pricing ORDER BY featured DESC, id ASC");
+    $pricingItems = $stmt->fetchAll();
+    ?>
+
+    <div class="container d-none d-lg-block">
+      <div class="row gy-4">
+        <?php foreach ($pricingItems as $index => $item): ?>
+          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="<?= ($index + 1) * 100 ?>">
+            <div class="pricing-tem">
+              <?php if ($item['featured']): ?>
+                <span class="featured">Featured</span>
+              <?php endif; ?>
+              <h3 style="color: <?= htmlspecialchars($item['icon_color']) ?>;">
+                <?= htmlspecialchars($item['title']) ?>
+              </h3>
+              <div class="price"><?= htmlspecialchars($item['price_label']) ?></div>
+              <div class="icon">
+                <i class="<?= htmlspecialchars($item['icon_class']) ?>" style="color: <?= htmlspecialchars($item['icon_color']) ?>;"></i>
+              </div>
+              <ul>
+                <?php foreach (explode("\n", $item['features']) as $feature): ?>
+                  <li><?= htmlspecialchars(trim($feature)) ?></li>
+                <?php endforeach; ?>
+              </ul>
+              <?php if (!empty($item['notes'])): ?>
+                <p style="font-size: 0.8em; margin-top: 10px;">
+                  <?= nl2br(htmlspecialchars($item['notes'])) ?>
+                </p>
+              <?php endif; ?>
+              <a href="<?= htmlspecialchars($item['cta_link']) ?>" class="btn-buy">
+                <?= htmlspecialchars($item['cta_text']) ?>
+              </a>
+            </div>
           </div>
-          <ul>
-            <li>E-commerce: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
-            <li>SME: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
-            <li>Academic: 3-5 Pages (Static) / 5-7 Pages (Dynamic)</li>
-            <li>Customized: 5-7 Pages (Static) / 8-13 Pages (Dynamic)</li>
-            
-          </ul>
-          <p style="font-size: 0.8em; margin-top: 10px;">
-            All web solutions are done professionally.<br>
-            Rates are subjected to change based on requirements.<br>
-            Your Vision | Our Solution
-          </p>
-          <a href="#contact" class="btn-buy">Get Started</a>
-        </div>
-      </div><!-- End Pricing Item -->
-
-      <!-- Custom Software Development Plan -->
-      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-        <div class="pricing-tem">
-          <span class="featured">Featured</span>
-          <h3 style="color: #0dcaf0;">Custom Software Development</h3>
-          <div class="price"><sup>Contact</sup>Us</div>
-          <div class="icon">
-            <i class="bi bi-send" style="color: #0dcaf0;"></i>
-          </div>
-          <ul>
-            <li>Tailored Software Solutions</li>
-            <li>Automation &amp; Process Optimization</li>
-            <li>Database Integration</li>
-            <li>Custom Features &amp; Scalability</li>
-            <li>Ongoing Support &amp; Maintenance</li>
-          </ul>
-          <p style="font-size: 0.8em; margin-top: 10px;">
-            Rates are subject to change based on project requirements.<br>
-            Your Vision | Our Solution
-          </p>
-          <a href="#contact" class="btn-buy">Get Started</a>
-        </div>
-      </div><!-- End Pricing Item -->
-
-      <!-- Managed IT Services Plan -->
-      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-        <div class="pricing-tem">
-          <h3 style="color: #fd7e14;">Managed IT Services</h3>
-          <div class="price"><sup>$</sup>799<span> / mo</span></div>
-          <div class="icon">
-            <i class="bi bi-airplane" style="color: #fd7e14;"></i>
-          </div>
-          <ul>
-            <li>24/7 IT Support</li>
-            <li>Server and Network Management</li>
-            <li>Cloud Solutions &amp; Data Backup</li>
-            <li>Security &amp; Disaster Recovery</li>
-            <li>Software &amp; Hardware Management</li>
-          </ul>
-          <a href="##contact" class="btn-buy">Get Started</a>
-        </div>
-      </div><!-- End Pricing Item -->
-
-      <!-- Enterprise IT Solutions Plan -->
-      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-        <div class="pricing-tem">
-          <h3 style="color: #0d6efd;">Enterprise IT Solutions</h3>
-          <div class="price"><sup>$</sup>1499<span> / mo</span></div>
-          <div class="icon">
-            <i class="bi bi-rocket" style="color: #0d6efd;"></i>
-          </div>
-          <ul>
-            <li>Complete Network Infrastructure</li>
-            <li>Advanced Software Integration</li>
-            <li>Enterprise Security Solutions</li>
-            <li>Cloud Migration &amp; Support</li>
-            <li>Dedicated IT Consultant</li>
-            <li>Custom Software &amp; Hardware Solutions</li>
-          </ul>
-          <a href="#contact" class="btn-buy">Contact Us</a>
-        </div>
-      </div><!-- End Pricing Item -->
-
+        <?php endforeach; ?>
+      </div>
     </div><!-- End pricing row -->
+
   </div>
 
 
@@ -953,107 +903,50 @@
 <div class="container d-block d-lg-none mt-4">
   <div class="swiper pricing-swiper">
     <div class="swiper-wrapper">
-
-      <!-- Web Design -->
-      <div class="swiper-slide">
-        <div class="pricing-tem">
-          <h3 style="color: #20c997;">Web Design</h3>
-          <div class="price"><sup>ksh</sup>3,500<span> - 30,000</span></div>
-          <div class="icon">
-            <i class="bi bi-box" style="color: #20c997;"></i>
+      <?php foreach ($pricingItems as $item): ?>
+        <div class="swiper-slide">
+          <div class="pricing-tem">
+            <?php if ($item['featured']): ?>
+              <span class="featured">Featured</span>
+            <?php endif; ?>
+            <h3 style="color: <?= htmlspecialchars($item['icon_color']) ?>;">
+              <?= htmlspecialchars($item['title']) ?>
+            </h3>
+            <div class="price"><?= htmlspecialchars($item['price_label']) ?></div>
+            <div class="icon">
+              <i class="<?= htmlspecialchars($item['icon_class']) ?>" style="color: <?= htmlspecialchars($item['icon_color']) ?>;"></i>
+            </div>
+            <ul>
+              <?php foreach (explode("\n", $item['features']) as $feature): ?>
+                <li><?= htmlspecialchars(trim($feature)) ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <?php if (!empty($item['notes'])): ?>
+              <p style="font-size: 0.8em; margin-top: 10px;">
+                <?= nl2br(htmlspecialchars($item['notes'])) ?>
+              </p>
+            <?php endif; ?>
+            <a href="<?= htmlspecialchars($item['cta_link']) ?>" class="btn-buy">
+              <?= htmlspecialchars($item['cta_text']) ?>
+            </a>
           </div>
-          <ul>
-            <li>E-commerce: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
-            <li>SME: 5-7 Pages (Static) / 7-10 Pages (Dynamic)</li>
-            <li>Academic: 3-5 Pages (Static) / 5-7 Pages (Dynamic)</li>
-            <li>Customized: 5-7 Pages (Static) / 8-13 Pages (Dynamic)</li>
-          </ul>
-          <p style="font-size: 0.8em; margin-top: 10px;">
-            All web solutions are done professionally.<br>
-            Rates are subjected to change based on requirements.<br>
-            Your Vision | Our Solution
-          </p>
-          <a href="#contact" class="btn-buy">Get Started</a>
         </div>
-      </div>
-
-      <!-- Custom Software Development -->
-      <div class="swiper-slide">
-        <div class="pricing-tem">
-          <span class="featured">Featured</span>
-          <h3 style="color: #0dcaf0;">Custom Software Development</h3>
-          <div class="price"><sup>Contact</sup>Us</div>
-          <div class="icon">
-            <i class="bi bi-send" style="color: #0dcaf0;"></i>
-          </div>
-          <ul>
-            <li>Tailored Software Solutions</li>
-            <li>Automation &amp; Process Optimization</li>
-            <li>Database Integration</li>
-            <li>Custom Features &amp; Scalability</li>
-            <li>Ongoing Support &amp; Maintenance</li>
-          </ul>
-          <p style="font-size: 0.8em; margin-top: 10px;">
-            Rates are subject to change based on project requirements.<br>
-            Your Vision | Our Solution
-          </p>
-          <a href="#contact" class="btn-buy">Get Started</a>
-        </div>
-      </div>
-
-      <!-- Managed IT Services -->
-      <div class="swiper-slide">
-        <div class="pricing-tem">
-          <h3 style="color: #fd7e14;">Managed IT Services</h3>
-          <div class="price"><sup>$</sup>799<span> / mo</span></div>
-          <div class="icon">
-            <i class="bi bi-airplane" style="color: #fd7e14;"></i>
-          </div>
-          <ul>
-            <li>24/7 IT Support</li>
-            <li>Server and Network Management</li>
-            <li>Cloud Solutions &amp; Data Backup</li>
-            <li>Security &amp; Disaster Recovery</li>
-            <li>Software &amp; Hardware Management</li>
-          </ul>
-          <a href="#contact" class="btn-buy">Get Started</a>
-        </div>
-      </div>
-
-      <!-- Enterprise IT Solutions -->
-      <div class="swiper-slide">
-        <div class="pricing-tem">
-          <h3 style="color: #0d6efd;">Enterprise IT Solutions</h3>
-          <div class="price"><sup>$</sup>1499<span> / mo</span></div>
-          <div class="icon">
-            <i class="bi bi-rocket" style="color: #0d6efd;"></i>
-          </div>
-          <ul>
-            <li>Complete Network Infrastructure</li>
-            <li>Advanced Software Integration</li>
-            <li>Enterprise Security Solutions</li>
-            <li>Cloud Migration &amp; Support</li>
-            <li>Dedicated IT Consultant</li>
-            <li>Custom Software &amp; Hardware Solutions</li>
-          </ul>
-          <a href="#contact" class="btn-buy">Contact Us</a>
-        </div>
-      </div>
-
+      <?php endforeach; ?>
     </div>
 
-    <!-- Pagination & Navigation -->
+    <!-- Pagination -->
     <div class="swiper-pagination mt-3"></div>
 
     <!-- Navigation -->
-    <button class="carousel-control-prev custom-carousel-btn pricing-button-prev" type="button" data-bs-target=".pricing-swiper" data-bs-slide="prev">
+    <button class="carousel-control-prev custom-carousel-btn pricing-button-prev" type="button">
       <i class="bi bi-chevron-left fs-3"></i>
     </button>
-    <button class="carousel-control-next custom-carousel-btn pricing-button-next" type="button" data-bs-target=".pricing-swiper" data-bs-slide="next">
+    <button class="carousel-control-next custom-carousel-btn pricing-button-next" type="button">
       <i class="bi bi-chevron-right fs-3"></i>
     </button>
   </div>
 </div>
+
 
 
 <!-- Swiper JS -->

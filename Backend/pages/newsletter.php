@@ -20,6 +20,7 @@ $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <?php include '../includes/header.php'; ?>
 
+
 <div class="container my-4">
   <h3>Newsletter Subscribers</h3>
 
@@ -75,25 +76,91 @@ $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <!-- send bulk mails -->
   <h4 class="mt-5">Send Bulk Email</h4>
-  <form id="bulk-email-form" action="../forms/sendbulkemails.php" class="mb-4">
-  <div class="mb-3">
-    <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-  </div>
-  <div class="mb-3">
-    <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Send to All Subscribers</button>
-  <div class="loading mt-2" style="display: none;">Sending...</div>
-  <div class="error-message text-danger mt-2" style="display: none;"></div>
-  <div class="sent-message text-success mt-2" style="display: none;"></div>
-  </form>
+  <form id="bulk-email-form" action="../forms/sendbulkemails.php" method="POST" class="mb-4 php-email-form">
+    <div class="mb-3">
+      <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send to All Subscribers</button>
 
-  <button class="btn btn-primary mt-3" onclick="alert('Bulk mailing feature coming soon!')">Send Bulk Email</button>
+    <div class="loading" >Loading</div>
+    <div class="error-message"></div>
+    <div class="sent-message">Your message has been sent. Thank you!</div>
+  </form>
+  <!-- <button class="btn btn-primary mt-3" onclick="alert('Bulk mailing feature coming soon!')">Send Bulk Email</button> -->
 </div>
 
+<script>
+  // send bulk messages
+  document.getElementById('bulk-email-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
 
+    const form = e.target;
+    const formData = new FormData(form);
+    const loading = form.querySelector('.loading');
+    const errorMsg = form.querySelector('.error-message');
+    const sentMsg = form.querySelector('.sent-message');
 
+    // Reset messages
+    [loading, errorMsg, sentMsg].forEach(el => {
+      el.classList.remove('show');
+      el.style.display = 'none';
+    });
 
+    // Show loading
+    loading.style.display = 'block';
+    requestAnimationFrame(() => loading.classList.add('show')); // smoother trigger
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      // Stop loading
+      loading.classList.remove('show');
+      setTimeout(() => loading.style.display = 'none', 300);
+
+      if (result.status === 'success') {
+        sentMsg.textContent = result.message;
+        sentMsg.style.display = 'block';
+        requestAnimationFrame(() => sentMsg.classList.add('show'));
+        form.reset();
+
+        setTimeout(() => {
+          sentMsg.classList.remove('show');
+          setTimeout(() => sentMsg.style.display = 'none', 300);
+        }, 5000);
+      } else {
+        errorMsg.textContent = result.message;
+        errorMsg.style.display = 'block';
+        requestAnimationFrame(() => errorMsg.classList.add('show'));
+
+        setTimeout(() => {
+          errorMsg.classList.remove('show');
+          setTimeout(() => errorMsg.style.display = 'none', 300);
+        }, 5000);
+      }
+
+    } catch (err) {
+      loading.classList.remove('show');
+      setTimeout(() => loading.style.display = 'none', 300);
+
+      errorMsg.textContent = 'An unexpected error occurred.';
+      errorMsg.style.display = 'block';
+      requestAnimationFrame(() => errorMsg.classList.add('show'));
+
+      setTimeout(() => {
+        errorMsg.classList.remove('show');
+        setTimeout(() => errorMsg.style.display = 'none', 300);
+      }, 5000);
+    }
+  });
+</script>
 
 
 <?php include '../includes/footer.php'; ?>

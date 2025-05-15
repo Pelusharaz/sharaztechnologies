@@ -153,61 +153,29 @@ document.getElementById('newsletters').addEventListener('submit', async function
 
 // end News letter subscriptions
 
-// send bulk messages
-document.getElementById('bulk-email-form').addEventListener('submit', async function (e) {
+// Pricing updates
+document.getElementById('pricingForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const formData = new FormData(this);
+  const statusMsg = document.getElementById('statusMsg');
+  statusMsg.textContent = 'Saving...';
 
-  const form = e.target;
-  const formData = new FormData(form);
-  const loading = form.querySelector('.loading');
-  const errorMsg = form.querySelector('.error-message');
-  const sentMsg = form.querySelector('.sent-message');
-
-  [loading, errorMsg, sentMsg].forEach(el => {
-    el.style.display = 'none';
-    el.classList.remove('show');
-  });
-
-  loading.style.display = 'block';
-  setTimeout(() => loading.classList.add('show'), 10);
-
-  try {
-    const response = await fetch('../forms/sendbulkemails.php', {
-      method: 'POST',
-      body: formData
+  fetch('save_pricing.php', {
+    method: 'POST',
+    body: formData
+  }).then(res => res.json())
+    .then(data => {
+      if (data.status === 'success') {
+        statusMsg.textContent = 'Saved successfully!';
+        setTimeout(() => location.reload(), 1000);
+      } else {
+        statusMsg.textContent = 'Error: ' + data.message;
+      }
+    }).catch(err => {
+      statusMsg.textContent = 'Error occurred.';
     });
-    const result = await response.json();
-
-    loading.classList.remove('show');
-    setTimeout(() => loading.style.display = 'none', 300);
-
-    if (result.status === 'success') {
-      sentMsg.textContent = result.message;
-      sentMsg.style.display = 'block';
-      setTimeout(() => sentMsg.classList.add('show'), 10);
-      form.reset();
-
-      setTimeout(() => {
-        sentMsg.classList.remove('show');
-        setTimeout(() => sentMsg.style.display = 'none', 300);
-      }, 5000);
-    } else {
-      throw new Error(result.message);
-    }
-  } catch (err) {
-    loading.classList.remove('show');
-    setTimeout(() => loading.style.display = 'none', 300);
-
-    errorMsg.textContent = err.message;
-    errorMsg.style.display = 'block';
-    setTimeout(() => errorMsg.classList.add('show'), 10);
-    setTimeout(() => {
-      errorMsg.classList.remove('show');
-      setTimeout(() => errorMsg.style.display = 'none', 300);
-    }, 5000);
-  }
 });
-
+// end pricing updates
 
 // to track activities on the site
 function trackAction(action) {
@@ -217,3 +185,5 @@ function trackAction(action) {
       body: 'action=' + encodeURIComponent(action)
     });
   }
+
+// end to track activities on the site

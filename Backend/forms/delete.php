@@ -30,6 +30,32 @@ if (isset($_GET['id'], $_GET['type']) && is_numeric($_GET['id'])) {
 }
 ?>
 
-
-
 <!-- messages delete handler  -->
+
+<!-- Delete Pricing  -->
+<?php
+require_once '../includes/config.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+  $stmt = $pdo->prepare("DELETE FROM pricing WHERE id = ?");
+  $stmt->execute([$_POST['id']]);
+}
+header("Location: ../pages/pricing.php");
+exit;
+?>
+
+<!-- Select Featured product -->
+ <?php
+require_once '../includes/config.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+  $id = $_POST['id'];
+  $stmt = $pdo->prepare("SELECT featured FROM pricing WHERE id = ?");
+  $stmt->execute([$id]);
+  $current = $stmt->fetchColumn();
+
+  $newVal = $current ? 0 : 1;
+  $update = $pdo->prepare("UPDATE pricing SET featured = ? WHERE id = ?");
+  $update->execute([$newVal, $id]);
+}
+header("Location:  ../pages/pricing.php");
+exit;
+?>
