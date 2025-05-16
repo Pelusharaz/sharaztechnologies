@@ -1,130 +1,148 @@
 <?php include '../includes/header.php'; ?>
 
-<h2>Manage Pricing Items</h2>
+<?php
+require_once '../includes/config.php';
 
-<!-- Add New -->
-<div class="container my-5">
-  <div class="card shadow-lg p-4">
-    <h4 class="mb-4">Add New Pricing Plan</h4>
-    <form id="pricingForm" method="POST" action="../forms/submit_pricing.php">
+// Fetch item if in edit mode
+$isEdit = isset($_GET['edit']) && is_numeric($_GET['edit']);
+$editItem = null;
 
-      <!-- Title -->
+if ($isEdit) {
+    $stmt = $pdo->prepare("SELECT * FROM pricing WHERE id = ?");
+    $stmt->execute([$_GET['edit']]);
+    $editItem = $stmt->fetch();
+}
+
+// Status messages
+$status = $_GET['status'] ?? '';
+$messages = [
+    'success' => 'Pricing item saved successfully.',
+    'deleted' => 'Pricing item deleted.',
+    'updated' => 'Pricing item updated.',
+    'error' => 'An error occurred. Please try again.',
+];
+?>
+
+<div class="container mt-4">
+  <h2><?= $isEdit ? 'Edit' : 'Add New' ?> Pricing Plan</h2>
+
+  <?php if (isset($messages[$status])): ?>
+    <div class="alert alert-<?= $status === 'error' ? 'danger' : 'success' ?>"><?= $messages[$status] ?></div>
+  <?php endif; ?>
+
+  <div class="card shadow p-4 my-4">
+    <form method="POST" action="../forms/submit_pricing.php">
+      <?php if ($isEdit): ?>
+        <input type="hidden" name="id" value="<?= $editItem['id'] ?>">
+        <input type="hidden" name="action" value="update">
+      <?php else: ?>
+        <input type="hidden" name="action" value="add">
+      <?php endif; ?>
+
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" id="title" class="form-control" required>
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required value="<?= $editItem['title'] ?? '' ?>">
       </div>
 
-      <!-- Price -->
       <div class="mb-3">
-        <label for="price" class="form-label">Price</label>
-        <input type="text" name="price" id="price" class="form-control" placeholder="E.g. Ksh 3,500 - 30,000 or Contact Us" required>
+        <label class="form-label">Price</label>
+        <input type="text" name="price" class="form-control" required placeholder="E.g. Ksh 3,500 - 30,000 or Contact Us" value="<?= $editItem['price_label'] ?? '' ?>">
       </div>
 
-      <!-- Icon Selection -->
       <div class="mb-3">
-        <label for="icon" class="form-label">Icon</label>
-        <select name="icon" id="icon" class="form-select" required>
-          <option value="bi-box"><i class="bi bi-box"></i> 📦 Box</option>
-          <option value="bi-send"><i class="bi bi-send"></i> ✉️ Send</option>
-          <option value="bi-airplane"><i class="bi bi-airplane"></i> ✈️ Airplane</option>
-          <option value="bi-rocket"><i class="bi bi-rocket"></i> 🚀 Rocket</option>
+        <label class="form-label">Icon</label>
+        <select name="icon" class="form-select" required>
+          <?php
+          $icons = ['bi-box' => '📦 Box', 'bi-send' => '✉️ Send', 'bi-airplane' => '✈️ Airplane', 'bi-rocket' => '🚀 Rocket'];
+          foreach ($icons as $val => $label) {
+              $selected = ($editItem['icon_class'] ?? '') === $val ? 'selected' : '';
+              echo "<option value='$val' $selected>$label</option>";
+          }
+          ?>
         </select>
       </div>
 
-      <!-- Color Selection -->
       <div class="mb-3">
-        <label for="color" class="form-label">Color</label>
-        <select name="color" id="color" class="form-select" required>
-          <option value="#20c997" style="color:#20c997;">🟩 Teal (#20c997)</option>
-          <option value="#0dcaf0" style="color:#0dcaf0;">🔵 Cyan (#0dcaf0)</option>
-          <option value="#fd7e14" style="color:#fd7e14;">🟧 Orange (#fd7e14)</option>
-          <option value="#0d6efd" style="color:#0d6efd;">🔷 Blue (#0d6efd)</option>
+        <label class="form-label">Color</label>
+        <select name="color" class="form-select" required>
+          <?php
+          $colors = [
+              '#20c997' => '🟩 Teal',
+              '#0dcaf0' => '🔵 Cyan',
+              '#fd7e14' => '🟧 Orange',
+              '#0d6efd' => '🔷 Blue'
+          ];
+          foreach ($colors as $val => $label) {
+              $selected = ($editItem['icon_color'] ?? '') === $val ? 'selected' : '';
+              echo "<option value='$val' style='color:$val' $selected>$label ($val)</option>";
+          }
+          ?>
         </select>
       </div>
 
-      <!-- Description -->
       <div class="mb-3">
-        <label for="description" class="form-label">List Items (separated by semicolon)</label>
-        <textarea name="description" id="description" class="form-control" rows="4" placeholder="E.g. Feature 1; Feature 2; Feature 3" required></textarea>
+        <label class="form-label">List Items (separated by semicolon)</label>
+        <textarea name="description" rows="4" class="form-control" required><?= isset($editItem['features']) ? str_replace("\n", "; ", $editItem['features']) : '' ?></textarea>
       </div>
 
-    <div class="mb-3">
-    <label for="cta_text" class="form-label">CTA Text</label>
-    <input type="text" name="cta_text" id="cta_text" class="form-control" value="Get Started">
-    </div>
-
-    <div class="mb-3">
-    <label for="cta_link" class="form-label">CTA Link</label>
-    <input type="text" name="cta_link" id="cta_link" class="form-control" value="#contact">
-    </div>
-
-
-      <!-- Notes -->
       <div class="mb-3">
-        <label for="note" class="form-label">Additional Notes</label>
-        <textarea name="note" id="note" class="form-control" rows="3" placeholder="Extra information (optional)"></textarea>
+        <label class="form-label">CTA Text</label>
+        <input type="text" name="cta_text" class="form-control" value="<?= $editItem['cta_text'] ?? 'Get Started' ?>">
       </div>
 
-      <!-- Featured Checkbox -->
+      <div class="mb-3">
+        <label class="form-label">CTA Link</label>
+        <input type="text" name="cta_link" class="form-control" value="<?= $editItem['cta_link'] ?? '#contact' ?>">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Notes (optional)</label>
+        <textarea name="note" class="form-control" rows="3"><?= $editItem['notes'] ?? '' ?></textarea>
+      </div>
+
       <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" name="featured" id="featured">
-        <label class="form-check-label" for="featured">Mark as Featured</label>
+        <input type="checkbox" name="featured" class="form-check-input" <?= !empty($editItem['featured']) ? 'checked' : '' ?>>
+        <label class="form-check-label">Mark as Featured</label>
       </div>
-      
 
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <div id="formStatus" class="mt-3"></div>
+      <button type="submit" class="btn btn-primary"><?= $isEdit ? 'Update' : 'Submit' ?></button>
     </form>
   </div>
 </div>
 
-
-
 <!-- Existing Items -->
 <?php
-require_once '../includes/config.php'; // adjust if in same dir
-
 $stmt = $pdo->query("SELECT * FROM pricing ORDER BY featured DESC, id ASC");
 $pricingItems = $stmt->fetchAll();
 ?>
 
 <div class="container mt-5">
-  <h2 class="mb-4">Manage Pricing Items</h2>
+  <h3>Manage Existing Pricing Items</h3>
   <div class="row gy-4">
     <?php foreach ($pricingItems as $item): ?>
       <div class="col-md-6 col-lg-4">
-        <div class="card shadow-sm border rounded p-3 position-relative">
+        <div class="card shadow-sm p-3 position-relative">
           <?php if ($item['featured']): ?>
             <span class="badge bg-warning position-absolute top-0 end-0 m-2">Featured</span>
           <?php endif; ?>
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0"><?= htmlspecialchars($item['title']) ?></h5>
-            <i class="<?= htmlspecialchars($item['icon_class']) ?> fs-4" style="color: <?= htmlspecialchars($item['icon_color']) ?>;"></i>
+            <h5><?= htmlspecialchars($item['title']) ?></h5>
+            <i class="<?= $item['icon_class'] ?> fs-4" style="color: <?= $item['icon_color'] ?>"></i>
           </div>
           <div class="text-muted mb-2"><?= htmlspecialchars($item['price_label']) ?></div>
-          <ul class="list-unstyled small">
+          <ul class="small list-unstyled">
             <?php foreach (explode("\n", $item['features']) as $feature): ?>
-              <li><i class="bi bi-check-circle me-1 text-success"></i> <?= htmlspecialchars(trim($feature)) ?></li>
+              <li><i class="bi bi-check-circle text-success me-1"></i> <?= htmlspecialchars($feature) ?></li>
             <?php endforeach; ?>
           </ul>
           <p class="small text-muted"><?= nl2br(htmlspecialchars($item['notes'])) ?></p>
-          <div class="d-flex justify-content-between mt-3">
-            <a href="edit_pricing.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-primary">
-              <i class="bi bi-pencil-square"></i> Edit
-            </a>
-            <form action="../forms/delete.php" method="POST" onsubmit="return confirm('Are you sure?')">
+          <div class="d-flex justify-content-between">
+            <a href="?edit=<?= $item['id'] ?>" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i> Edit</a>
+            <a href="../forms/actions.php?id=<?= $item['id'] ?>&type=pricing&action=delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to Delete this item?')"><i class="bi bi-trash"></i> Delete</a>
+            <form method="POST" action="../forms/actions.php">
               <input type="hidden" name="id" value="<?= $item['id'] ?>">
-              <button type="submit" class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i> Delete
-              </button>
-            </form>
-            <form action="../forms/delete.php" method="POST">
-              <input type="hidden" name="id" value="<?= $item['id'] ?>">
-              <button type="submit" class="btn btn-sm btn-outline-<?= $item['featured'] ? 'secondary' : 'success' ?>">
-                <i class="bi bi-star<?= $item['featured'] ? '-fill' : '' ?>"></i>
-                <?= $item['featured'] ? 'Unfeature' : 'Feature' ?>
-              </button>
+              <input type="hidden" name="action" value="feature">
+              <button class="btn btn-sm btn-outline-<?= $item['featured'] ? 'secondary' : 'success' ?>"><i class="bi bi-star<?= $item['featured'] ? '-fill' : '' ?>"></i> <?= $item['featured'] ? 'Unfeature' : 'Feature' ?></button>
             </form>
           </div>
         </div>
@@ -132,7 +150,5 @@ $pricingItems = $stmt->fetchAll();
     <?php endforeach; ?>
   </div>
 </div>
-
-
 
 <?php include '../includes/footer.php'; ?>

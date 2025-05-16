@@ -42,7 +42,7 @@ $subscribers = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <td><?= date('d M Y, H:i', strtotime($sub['subscribed_at'])) ?></td>
           <td>
             <a href="mailto:<?= $sub['email'] ?>" class="btn btn-sm btn-success">Email</a>
-            <a href="../forms/delete.php?id=<?= $sub['id'] ?>&type=newsletter" class="btn btn-sm btn-danger" onclick="return confirm('Delete this subscriber?')">Delete</a>
+            <a href="../forms/actions.php?id=<?= $sub['id'] ?> &type=newsletter&action=delete" class="btn btn-sm btn-danger" onclick="return confirm('Delete this subscriber?')">Delete</a>
           </td>
         </tr>
         <?php endforeach; ?>

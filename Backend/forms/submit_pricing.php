@@ -1,52 +1,56 @@
 <?php
-require_once '../includes/config.php'; // your existing PDO connection
-
-$response = [];
+ob_start();
+require_once '../includes/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $title = $_POST['title'] ?? '';
-        $price = $_POST['price'] ?? '';
-        $icon = $_POST['icon'] ?? '';
-        $color = $_POST['color'] ?? '';
-        $features = $_POST['description'] ?? '';
-        $notes = $_POST['note'] ?? '';
-        $cta_text = $_POST['cta_text'] ?? 'Get Started'; // fallback value
-        $cta_link = $_POST['cta_link'] ?? '#contact';
-        $is_featured = isset($_POST['featured']) ? 1 : 0;
+    $action = $_POST['action'] ?? '';
+    $id = isset($_POST['id']) ? intval($_POST['id']) : null;
 
-        // Optional: unset other featured rows if this is marked featured
-        if ($is_featured) {
-            $pdo->query("UPDATE pricing SET featured = 0");
+    // Common inputs
+    $title = $_POST['title'] ?? '';
+    $price = $_POST['price'] ?? '';
+    $icon = $_POST['icon'] ?? '';
+    $color = $_POST['color'] ?? '';
+    $desc = $_POST['description'] ?? '';
+    $cta_text = $_POST['cta_text'] ?? '';
+    $cta_link = $_POST['cta_link'] ?? '';
+    $note = $_POST['note'] ?? '';
+    $featured = isset($_POST['featured']) ? 1 : 0;
+    $featuresFormatted = trim(preg_replace('/\s*;\s*/', "\n", $desc));
+
+    try {
+        if ($action === 'add') {
+            $stmt = $pdo->prepare("INSERT INTO pricing (title, price_label, icon_class, icon_color, features, cta_text, cta_link, notes, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$title, $price, $icon, $color, $featuresFormatted, $cta_text, $cta_link, $note, $featured]);
+            header("Location: ../pages/pricing.php?status=success");
+            exit;
         }
 
-        $stmt = $pdo->prepare("INSERT INTO pricing (title, price_label, icon_class, icon_color, features, notes, cta_text, cta_link, featured) 
-                               VALUES (:title, :price, :icon, :color, :features, :notes, :cta_text, :cta_link, :featured)");
+        if ($action === 'update' && $id) {
+            $stmt = $pdo->prepare("UPDATE pricing SET title=?, price_label=?, icon_class=?, icon_color=?, features=?, cta_text=?, cta_link=?, notes=?, featured=? WHERE id=?");
+            $stmt->execute([$title, $price, $icon, $color, $featuresFormatted, $cta_text, $cta_link, $note, $featured, $id]);
+            header("Location: ../pages/pricing.php?status=updated");
+            exit;
+        }
 
-        $stmt->execute([
-            ':title' => $title,
-            ':price' => $price,
-            ':icon' => $icon,
-            ':color' => $color,
-            ':features' => $features,
-            ':notes' => $notes,
-            ':cta_text' => $cta_text,
-            ':cta_link' => $cta_link,
-            ':featured' => $is_featured
-        ]);
-
-        $response['success'] = true;
-        $response['message'] = 'Pricing item added successfully.';
+        if ($action === 'feature' && $id) {
+            $stmt = $pdo->prepare("SELECT featured FROM pricing WHERE id = ?");
+            $stmt->execute([$id]);
+            $current = $stmt->fetchColumn();
+            $newVal = $current ? 0 : 1;
+            $stmt = $pdo->prepare("UPDATE pricing SET featured = ? WHERE id = ?");
+            $stmt->execute([$newVal, $id]);
+            header("Location: ../pages/pricing.php?status=updated");
+            exit;
+        }
     } catch (Exception $e) {
-        $response['success'] = false;
-        $response['message'] = 'Error: ' . $e->getMessage();
+        header("Location: ../pages/pricing.php?status=error");
+        exit;
     }
-} else {
-    $response['success'] = false;
-    $response['message'] = 'Invalid request method.';
 }
 
-// Return JSON if called via AJAX
-header('Content-Type: application/json');
-echo json_encode($response);
+
+// Fallback
+header("Location: ../pages/pricing.php?status=error");
 exit;
+
